@@ -1,12 +1,33 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useListAlbums, useListTestimonials } from "@workspace/api-client-react";
-import { Play, Disc, ArrowRight, Quote } from "lucide-react";
+import { Play, Disc, ArrowRight, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+
+const VISIBLE = 3;
 
 export default function Home() {
   const { data: albumsData } = useListAlbums({ limit: 4, role: 'performer' });
   const { data: testimonialsData } = useListTestimonials();
+  const [tIndex, setTIndex] = useState(0);
+  const [tDir, setTDir] = useState(1);
+
+  const testimonials = testimonialsData?.testimonials ?? [];
+  const total = testimonials.length;
+
+  function prevTestimonial() {
+    setTDir(-1);
+    setTIndex((i) => (i - 1 + total) % total);
+  }
+  function nextTestimonial() {
+    setTDir(1);
+    setTIndex((i) => (i + 1) % total);
+  }
+
+  const visible = total > 0
+    ? Array.from({ length: Math.min(VISIBLE, total) }, (_, k) => testimonials[(tIndex + k) % total])
+    : [];
 
   return (
     <div className="w-full">
@@ -108,29 +129,74 @@ export default function Home() {
             <p className="text-muted-foreground max-w-2xl mx-auto">What top artists and students say about working with Fountainhead.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonialsData?.testimonials?.slice(0, 3).map((t, i) => (
-              <motion.div
-                key={t.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="glass-panel p-8 relative"
-              >
-                <Quote className="w-10 h-10 text-primary/30 absolute top-6 left-6" />
-                <p className="text-gray-300 italic mb-6 relative z-10 pt-4">"{t.quote}"</p>
-                <div className="flex items-center gap-4 mt-auto">
-                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center font-display font-bold text-lg text-secondary">
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className="text-white font-bold">{t.name}</h4>
-                    <p className="text-xs text-primary uppercase tracking-wider">{t.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="relative">
+            {/* Nav buttons */}
+            <button
+              onClick={prevTestimonial}
+              disabled={total === 0}
+              className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-primary/20 hover:border-primary/50 transition-colors disabled:opacity-30"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextTestimonial}
+              disabled={total === 0}
+              className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-primary/20 hover:border-primary/50 transition-colors disabled:opacity-30"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Cards */}
+            <div className="overflow-hidden px-2">
+              <AnimatePresence mode="popLayout" initial={false} custom={tDir}>
+                <motion.div
+                  key={tIndex}
+                  custom={tDir}
+                  variants={{
+                    enter: (dir: number) => ({ x: dir * 80, opacity: 0 }),
+                    center: { x: 0, opacity: 1 },
+                    exit: (dir: number) => ({ x: dir * -80, opacity: 0 }),
+                  }}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                  className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                >
+                  {visible.map((t, i) => (
+                    <div key={`${tIndex}-${i}`} className="glass-panel p-8 relative">
+                      <Quote className="w-10 h-10 text-primary/30 absolute top-6 left-6" />
+                      <p className="text-gray-300 italic mb-6 relative z-10 pt-4">"{t.quote}"</p>
+                      <div className="flex items-center gap-4 mt-auto">
+                        <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center font-display font-bold text-lg text-secondary">
+                          {t.name.charAt(0)}
+                        </div>
+                        <div>
+                          <h4 className="text-white font-bold">{t.name}</h4>
+                          <p className="text-xs text-primary uppercase tracking-wider">{t.role}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Dots */}
+            {total > VISIBLE && (
+              <div className="flex justify-center gap-2 mt-10">
+                {Array.from({ length: total }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { setTDir(i > tIndex ? 1 : -1); setTIndex(i); }}
+                    className={`w-2 h-2 rounded-full transition-all ${i === tIndex ? "bg-primary w-6" : "bg-white/20 hover:bg-white/40"}`}
+                    aria-label={`Go to testimonial ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
