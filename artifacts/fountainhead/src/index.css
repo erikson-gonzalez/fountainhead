@@ -47,15 +47,15 @@
      #D5B584  →  warm sand gold secondary
   ───────────────────────────────────────────────── */
 
-  /* Background: #100F0D */
-  --background: 30 8% 5%;
-  --foreground: 0 0% 92%;          /* #EAEAEA */
+  /* Background: clean cool near-black */
+  --background: 0 0% 5%;
+  --foreground: 0 0% 92%;
 
   /* Card surfaces — very slightly lifted */
-  --card: 30 6% 8%;
+  --card: 0 0% 8%;
   --card-foreground: 0 0% 92%;
 
-  --popover: 30 6% 7%;
+  --popover: 0 0% 7%;
   --popover-foreground: 0 0% 92%;
 
   /* Primary: deep wine/burgundy red — elegant */
@@ -66,18 +66,17 @@
   --secondary: 36 48% 67%;
   --secondary-foreground: 30 8% 6%;
 
-  --muted: 30 5% 11%;
+  --muted: 0 0% 11%;
   --muted-foreground: 0 0% 58%;
 
   --accent: 36 48% 67%;
-  --accent-foreground: 30 8% 6%;
+  --accent-foreground: 0 0% 6%;
 
   --destructive: 0 65% 52%;
   --destructive-foreground: 0 0% 100%;
 
-  /* Borders: subtle warm-tinted */
   --border: 0 0% 14%;
-  --input: 30 5% 11%;
+  --input: 0 0% 11%;
   --ring: 344 55% 40%;
 }
 
@@ -104,9 +103,9 @@
   }
 }
 
-/* Glass panel — dark, slightly warm */
+/* Glass panel — clean dark */
 .glass-panel {
-  background: rgba(20, 19, 17, 0.55);
+  background: rgba(14, 14, 14, 0.55);
   @apply backdrop-blur-xl border border-white/6 shadow-2xl;
 }
 
