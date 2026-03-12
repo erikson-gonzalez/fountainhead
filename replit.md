@@ -77,11 +77,11 @@ Tables: `albums`, `news`, `products`, `orders`, `bookings`, `quotes`, `testimoni
 
 ## Design System
 
-- Elegant dark theme: deep warm charcoal backgrounds (`22 12% 5%`)
-- Deep burgundy/wine primary accent (`344 55% 40%`) — sophisticated, not aggressive
-- Champagne/antique gold secondary accent (`40 48% 62%`) — refined, not amber
-- Warm ivory foreground (`38 18% 90%`) — cream, not stark white
-- Warm-tinted borders and glass panels for consistency
+Moodboard palette (4 exact colors):
+- `#100F0D` — near-black warm base (background)
+- `#EAEAEA` — soft light gray (foreground / body text)
+- `#8AB3D1` — steel blue (primary accent: buttons, active states, hero gradient)
+- `#D5B584` — warm sand gold (secondary accent: labels, prices, decorative details)
 - Premium serif typography for headings (Cinzel)
 - Inter for body text
 

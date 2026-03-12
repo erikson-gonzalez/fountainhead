@@ -40,37 +40,45 @@
 }
 
 :root {
-  /* Elegant Dark — warm charcoal base */
-  --background: 22 12% 5%;
-  --foreground: 38 18% 90%;
+  /* ── Moodboard palette ──────────────────────────
+     #100F0D  →  near-black warm base
+     #EAEAEA  →  soft light gray / off-white
+     #8AB3D1  →  steel blue primary
+     #D5B584  →  warm sand gold secondary
+  ───────────────────────────────────────────────── */
 
-  --card: 22 10% 8%;
-  --card-foreground: 38 18% 90%;
+  /* Background: #100F0D */
+  --background: 30 8% 5%;
+  --foreground: 0 0% 92%;          /* #EAEAEA */
 
-  --popover: 22 10% 7%;
-  --popover-foreground: 38 18% 90%;
+  /* Card surfaces — very slightly lifted */
+  --card: 30 6% 8%;
+  --card-foreground: 0 0% 92%;
 
-  /* Deep Burgundy / Wine — sophisticated, not aggressive */
-  --primary: 344 55% 40%;
-  --primary-foreground: 38 18% 97%;
+  --popover: 30 6% 7%;
+  --popover-foreground: 0 0% 92%;
 
-  /* Champagne / Antique Gold — refined, not amber */
-  --secondary: 40 48% 62%;
-  --secondary-foreground: 22 12% 8%;
+  /* Primary: #8AB3D1  steel blue */
+  --primary: 207 43% 68%;
+  --primary-foreground: 30 8% 6%;
 
-  --muted: 22 8% 12%;
-  --muted-foreground: 38 8% 58%;
+  /* Secondary: #D5B584  warm sand gold */
+  --secondary: 36 48% 67%;
+  --secondary-foreground: 30 8% 6%;
 
-  --accent: 40 48% 62%;
-  --accent-foreground: 22 12% 8%;
+  --muted: 30 5% 11%;
+  --muted-foreground: 0 0% 58%;
 
-  --destructive: 0 68% 52%;
+  --accent: 36 48% 67%;
+  --accent-foreground: 30 8% 6%;
+
+  --destructive: 0 65% 52%;
   --destructive-foreground: 0 0% 100%;
 
-  /* Warm-tinted borders */
-  --border: 38 12% 17%;
-  --input: 22 8% 12%;
-  --ring: 344 55% 40%;
+  /* Borders: subtle warm-tinted */
+  --border: 0 0% 14%;
+  --input: 30 5% 11%;
+  --ring: 207 43% 68%;
 }
 
 @layer base {
@@ -78,13 +86,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/25 selection:text-primary-foreground;
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/20 selection:text-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-wide;
   }
-  
-  /* Scrollbar */
+
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -93,32 +100,41 @@
     @apply bg-background;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-secondary/25 rounded-full hover:bg-secondary/45 transition-colors;
+    @apply bg-secondary/30 rounded-full hover:bg-secondary/50 transition-colors;
   }
 }
 
+/* Glass panel — dark, slightly warm */
 .glass-panel {
-  background: rgba(255, 248, 236, 0.03);
+  background: rgba(20, 19, 17, 0.55);
   @apply backdrop-blur-xl border border-white/6 shadow-2xl;
 }
 
+/* Gold shimmer gradient — #D5B584 based */
 .text-gradient-gold {
   @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(135deg, hsl(40 45% 55%), hsl(42 60% 75%), hsl(40 45% 55%));
+  background-image: linear-gradient(135deg, #c4a472, #D5B584, #e2cc9f, #D5B584);
   -webkit-background-clip: text;
 }
 
+/* Steel-blue gradient — #8AB3D1 based */
+.text-gradient-blue {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #6d9fc4, #8AB3D1, #aacde6);
+  -webkit-background-clip: text;
+}
+
+/* Backward-compat alias — now renders as steel blue */
 .text-gradient-red {
   @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(135deg, hsl(344 55% 40%), hsl(344 55% 60%));
+  background-image: linear-gradient(135deg, #6d9fc4, #8AB3D1, #aacde6);
   -webkit-background-clip: text;
 }
 
-/* Elegant glow utilities */
+/* Glow utilities */
 .glow-primary {
-  box-shadow: 0 0 40px -8px hsl(344 55% 40% / 0.4);
+  box-shadow: 0 0 45px -10px hsl(207 43% 68% / 0.35);
 }
-
 .glow-secondary {
-  box-shadow: 0 0 40px -8px hsl(40 48% 62% / 0.3);
+  box-shadow: 0 0 45px -10px hsl(36 48% 67% / 0.3);
 }
