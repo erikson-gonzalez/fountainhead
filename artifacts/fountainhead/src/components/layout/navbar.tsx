@@ -57,15 +57,15 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium tracking-wider uppercase transition-colors hover:text-secondary relative",
-                location === link.href ? "text-secondary" : "text-muted-foreground"
+                "text-sm font-medium tracking-wider uppercase transition-colors hover:text-primary relative",
+                location === link.href ? "text-primary" : "text-muted-foreground"
               )}
             >
               {link.label}
               {location === link.href && (
                 <motion.div
                   layoutId="nav-underline"
-                  className="absolute -bottom-2 left-0 right-0 h-px bg-secondary/70"
+                  className="absolute -bottom-2 left-0 right-0 h-px bg-primary/70"
                 />
               )}
             </Link>
@@ -73,7 +73,7 @@ export function Navbar() {
           
           <button 
             onClick={() => setIsCartOpen(true)}
-            className="relative p-2 text-muted-foreground hover:text-secondary transition-colors"
+            className="relative p-2 text-muted-foreground hover:text-primary transition-colors"
           >
             <ShoppingBag className="w-5 h-5" />
             {cartCount > 0 && (
@@ -88,7 +88,7 @@ export function Navbar() {
         <div className="flex items-center gap-4 lg:hidden relative z-50">
           <button 
             onClick={() => setIsCartOpen(true)}
-            className="relative p-2 text-muted-foreground hover:text-secondary transition-colors"
+            className="relative p-2 text-muted-foreground hover:text-primary transition-colors"
           >
             <ShoppingBag className="w-5 h-5" />
             {cartCount > 0 && (
@@ -120,7 +120,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)}
               className={cn(
                 "text-2xl font-display tracking-widest uppercase transition-colors",
-                location === link.href ? "text-secondary" : "text-foreground hover:text-secondary"
+                location === link.href ? "text-primary" : "text-foreground hover:text-primary"
               )}
             >
               {link.label}

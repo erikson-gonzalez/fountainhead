@@ -33,7 +33,7 @@ export function CartDrawer() {
               </h2>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-2 text-muted-foreground hover:text-white transition-colors"
+                className="p-2 text-muted-foreground hover:text-primary transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>

@@ -68,7 +68,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/book">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto text-foreground border-secondary/25 hover:bg-secondary/10 hover:border-secondary/50">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto text-foreground border-primary/25 hover:bg-primary/10 hover:border-primary/50 hover:text-primary">
                   Book a Lesson
                 </Button>
               </Link>
@@ -84,7 +84,7 @@ export default function Home() {
             <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground tracking-wider mb-2">Featured Works</h2>
             <div className="h-1 w-20 bg-primary" />
           </div>
-          <Link href="/discography" className="hidden md:flex items-center gap-2 text-secondary hover:text-primary transition-colors font-medium tracking-widest uppercase text-sm">
+          <Link href="/discography" className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-medium tracking-widest uppercase text-sm">
             View All <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -134,7 +134,7 @@ export default function Home() {
             <button
               onClick={prevTestimonial}
               disabled={total === 0}
-              className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-secondary/5 border border-secondary/15 flex items-center justify-center text-foreground hover:bg-primary/15 hover:border-primary/40 transition-colors disabled:opacity-30"
+              className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center text-foreground hover:bg-primary/20 hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-30"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -142,7 +142,7 @@ export default function Home() {
             <button
               onClick={nextTestimonial}
               disabled={total === 0}
-              className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-secondary/5 border border-secondary/15 flex items-center justify-center text-foreground hover:bg-primary/15 hover:border-primary/40 transition-colors disabled:opacity-30"
+              className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center text-foreground hover:bg-primary/20 hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-30"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -191,7 +191,7 @@ export default function Home() {
                   <button
                     key={i}
                     onClick={() => { setTDir(i > tIndex ? 1 : -1); setTIndex(i); }}
-                    className={`w-2 h-2 rounded-full transition-all ${i === tIndex ? "bg-secondary w-6" : "bg-secondary/20 hover:bg-secondary/40"}`}
+                    className={`w-2 h-2 rounded-full transition-all ${i === tIndex ? "bg-primary w-6" : "bg-primary/20 hover:bg-primary/40"}`}
                     aria-label={`Go to testimonial ${i + 1}`}
                   />
                 ))}
