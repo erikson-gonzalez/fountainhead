@@ -13,13 +13,19 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={`${import.meta.env.BASE_URL}images/hero-bg.png`}
-            alt="Fountainhead Studio" 
-            className="w-full h-full object-cover opacity-60"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-          <div className="absolute inset-0 bg-black/30" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            poster={`${import.meta.env.BASE_URL}images/hero-bg.png`}
+          >
+            <source src="https://assets.mixkit.co/videos/4754/4754-720.mp4" type="video/mp4" />
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-mixing-sound-in-the-studio-4754-large.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/20" />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-20">
