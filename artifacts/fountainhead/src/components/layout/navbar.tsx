@@ -34,19 +34,18 @@ export function Navbar() {
     <header
       className={cn(
         "fixed top-0 w-full z-40 transition-all duration-500",
-        scrolled ? "bg-background/90 backdrop-blur-md border-b border-white/5 py-4" : "bg-transparent py-6"
+        scrolled ? "bg-background/92 backdrop-blur-md border-b border-secondary/10 py-4" : "bg-transparent py-6"
       )}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         <Link href="/" className="group flex items-center gap-3 relative z-50">
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 border border-primary/30 group-hover:bg-primary/20 transition-colors">
-            {/* Abstract Flame Logo Placeholder */}
             <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-primary" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6c-2.5 0-3.5 3-3.5 3S10 9 12 9s3.5-3 3.5-3-1 3-3.5 3z" />
             </svg>
           </div>
-          <span className="font-display font-bold text-xl tracking-[0.2em] text-white">
+          <span className="font-display font-bold text-xl tracking-[0.2em] text-foreground">
             FOUNTAINHEAD
           </span>
         </Link>
@@ -58,15 +57,15 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium tracking-wider uppercase transition-colors hover:text-primary relative",
-                location === link.href ? "text-primary" : "text-muted-foreground"
+                "text-sm font-medium tracking-wider uppercase transition-colors hover:text-secondary relative",
+                location === link.href ? "text-secondary" : "text-muted-foreground"
               )}
             >
               {link.label}
               {location === link.href && (
                 <motion.div
                   layoutId="nav-underline"
-                  className="absolute -bottom-2 left-0 right-0 h-0.5 bg-primary"
+                  className="absolute -bottom-2 left-0 right-0 h-px bg-secondary/70"
                 />
               )}
             </Link>
@@ -74,11 +73,11 @@ export function Navbar() {
           
           <button 
             onClick={() => setIsCartOpen(true)}
-            className="relative p-2 text-white hover:text-primary transition-colors"
+            className="relative p-2 text-muted-foreground hover:text-secondary transition-colors"
           >
             <ShoppingBag className="w-5 h-5" />
             {cartCount > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-[10px] font-bold flex items-center justify-center rounded-full">
+              <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center rounded-full">
                 {cartCount}
               </span>
             )}
@@ -89,18 +88,18 @@ export function Navbar() {
         <div className="flex items-center gap-4 lg:hidden relative z-50">
           <button 
             onClick={() => setIsCartOpen(true)}
-            className="relative p-2 text-white"
+            className="relative p-2 text-muted-foreground hover:text-secondary transition-colors"
           >
             <ShoppingBag className="w-5 h-5" />
             {cartCount > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-[10px] font-bold flex items-center justify-center rounded-full">
+              <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center rounded-full">
                 {cartCount}
               </span>
             )}
           </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-white p-2"
+            className="text-foreground p-2"
           >
             {mobileOpen ? <X /> : <Menu />}
           </button>
@@ -121,7 +120,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)}
               className={cn(
                 "text-2xl font-display tracking-widest uppercase transition-colors",
-                location === link.href ? "text-primary" : "text-white"
+                location === link.href ? "text-secondary" : "text-foreground hover:text-secondary"
               )}
             >
               {link.label}

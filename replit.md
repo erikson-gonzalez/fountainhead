@@ -77,10 +77,12 @@ Tables: `albums`, `news`, `products`, `orders`, `bookings`, `quotes`, `testimoni
 
 ## Design System
 
-- Dark cinematic theme: deep black/charcoal backgrounds
-- Crimson red primary accent (#DC2626 range)
-- Amber/gold secondary accent
-- Premium serif typography for headings (Playfair Display)
+- Elegant dark theme: deep warm charcoal backgrounds (`22 12% 5%`)
+- Deep burgundy/wine primary accent (`344 55% 40%`) — sophisticated, not aggressive
+- Champagne/antique gold secondary accent (`40 48% 62%`) — refined, not amber
+- Warm ivory foreground (`38 18% 90%`) — cream, not stark white
+- Warm-tinted borders and glass panels for consistency
+- Premium serif typography for headings (Cinzel)
 - Inter for body text
 
 ## Running
