@@ -21,8 +21,7 @@ export default function Home() {
             className="w-full h-full object-cover"
             poster={`${import.meta.env.BASE_URL}images/hero-bg.png`}
           >
-            <source src="https://assets.mixkit.co/videos/4754/4754-720.mp4" type="video/mp4" />
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-mixing-sound-in-the-studio-4754-large.mp4" type="video/mp4" />
+            <source src="https://assets.mixkit.co/videos/3587/3587-720.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/20" />
           <div className="absolute inset-0 bg-black/50" />
