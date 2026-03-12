@@ -1,22 +1,39 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Fountainhead API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: albums
+    description: Discography albums
+  - name: news
+    description: News and blog posts
+  - name: services
+    description: Services (booking, quotes, e-commerce)
+  - name: products
+    description: Shop products
+  - name: orders
+    description: Orders and checkout
+  - name: bookings
+    description: Booking system
+  - name: quotes
+    description: Quote builder
+  - name: portal
+    description: Student portal
+  - name: testimonials
+    description: Artist testimonials and student reviews
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +41,384 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  # --- ALBUMS ---
+  /albums:
+    get:
+      operationId: listAlbums
+      tags: [albums]
+      summary: List all albums
+      parameters:
+        - name: role
+          in: query
+          schema:
+            type: string
+        - name: genre
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 12
+      responses:
+        "200":
+          description: List of albums
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlbumListResponse"
+
+  /albums/{id}:
+    get:
+      operationId: getAlbum
+      tags: [albums]
+      summary: Get a single album
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Album detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Album"
+        "404":
+          description: Not found
+
+  # --- NEWS ---
+  /news:
+    get:
+      operationId: listNews
+      tags: [news]
+      summary: List news posts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: List of news posts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsListResponse"
+
+  /news/{slug}:
+    get:
+      operationId: getNewsPost
+      tags: [news]
+      summary: Get a news post by slug
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: News post
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsPost"
+        "404":
+          description: Not found
+
+  # --- PRODUCTS ---
+  /products:
+    get:
+      operationId: listProducts
+      tags: [products]
+      summary: List shop products
+      parameters:
+        - name: category
+          in: query
+          schema:
+            $ref: "#/components/schemas/ProductCategory"
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 12
+      responses:
+        "200":
+          description: List of products
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductListResponse"
+
+  /products/{id}:
+    get:
+      operationId: getProduct
+      tags: [products]
+      summary: Get product by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Product detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Not found
+
+  # --- ORDERS / CHECKOUT ---
+  /orders:
+    post:
+      operationId: createOrder
+      tags: [orders]
+      summary: Create a new order (checkout)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderRequest"
+      responses:
+        "201":
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: Invalid request
+
+  /orders/{id}:
+    get:
+      operationId: getOrder
+      tags: [orders]
+      summary: Get order by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Order detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "404":
+          description: Not found
+
+  # --- BOOKINGS ---
+  /bookings/availability:
+    get:
+      operationId: getAvailability
+      tags: [bookings]
+      summary: Get available time slots
+      parameters:
+        - name: serviceType
+          in: query
+          required: true
+          schema:
+            $ref: "#/components/schemas/BookingServiceType"
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: string
+            description: "YYYY-MM format"
+      responses:
+        "200":
+          description: Available slots
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AvailabilityResponse"
+
+  /bookings:
+    post:
+      operationId: createBooking
+      tags: [bookings]
+      summary: Create a booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBookingRequest"
+      responses:
+        "201":
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        "400":
+          description: Invalid request or slot unavailable
+    get:
+      operationId: listBookings
+      tags: [bookings]
+      summary: List all bookings (admin)
+      responses:
+        "200":
+          description: List of bookings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bookings:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Booking"
+                required: [bookings]
+
+  # --- QUOTES ---
+  /quotes:
+    post:
+      operationId: createQuote
+      tags: [quotes]
+      summary: Submit a quote request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateQuoteRequest"
+      responses:
+        "201":
+          description: Quote submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quote"
+        "400":
+          description: Invalid request
+
+  /quotes/estimate:
+    post:
+      operationId: estimateQuote
+      tags: [quotes]
+      summary: Get price estimate for a quote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimateQuoteRequest"
+      responses:
+        "200":
+          description: Price estimate
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteEstimate"
+
+  # --- TESTIMONIALS ---
+  /testimonials:
+    get:
+      operationId: listTestimonials
+      tags: [testimonials]
+      summary: List testimonials
+      parameters:
+        - name: type
+          in: query
+          schema:
+            $ref: "#/components/schemas/TestimonialType"
+      responses:
+        "200":
+          description: List of testimonials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestimonialListResponse"
+
+  # --- PORTAL ---
+  /portal/lessons:
+    get:
+      operationId: listPortalLessons
+      tags: [portal]
+      summary: List available lessons in the student portal
+      responses:
+        "200":
+          description: Lessons list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PortalLessonListResponse"
+
+  /portal/resources:
+    get:
+      operationId: listPortalResources
+      tags: [portal]
+      summary: List downloadable resources for students
+      responses:
+        "200":
+          description: Resources list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PortalResourceListResponse"
+
+  /portal/access:
+    post:
+      operationId: requestPortalAccess
+      tags: [portal]
+      summary: Request portal access (student registration)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PortalAccessRequest"
+      responses:
+        "200":
+          description: Access granted or pending
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PortalAccessResponse"
+
+  # --- SERVICES INFO ---
+  /services:
+    get:
+      operationId: listServices
+      tags: [services]
+      summary: List all services with prices
+      responses:
+        "200":
+          description: Services list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceListResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +426,526 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    # --- ALBUMS ---
+    Album:
+      type: object
+      properties:
+        id:
+          type: integer
+        artist:
+          type: string
+        title:
+          type: string
+        releaseDate:
+          type: string
+        role:
+          type: string
+        genre:
+          type: string
+        coverUrl:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        featured:
+          type: boolean
+      required: [id, artist, title, releaseDate, role, genre, featured]
+
+    AlbumListResponse:
+      type: object
+      properties:
+        albums:
+          type: array
+          items:
+            $ref: "#/components/schemas/Album"
+        total:
+          type: integer
+        page:
+          type: integer
+        totalPages:
+          type: integer
+      required: [albums, total, page, totalPages]
+
+    # --- NEWS ---
+    NewsPost:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        excerpt:
+          type: string
+          nullable: true
+        publishedAt:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+      required: [id, slug, title, content, publishedAt]
+
+    NewsListResponse:
+      type: object
+      properties:
+        posts:
+          type: array
+          items:
+            $ref: "#/components/schemas/NewsPost"
+        total:
+          type: integer
+        page:
+          type: integer
+        totalPages:
+          type: integer
+      required: [posts, total, page, totalPages]
+
+    # --- PRODUCTS ---
+    ProductCategory:
+      type: string
+      enum: [merch, picks, courses, sample-packs, all]
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        priceEur:
+          type: number
+        category:
+          $ref: "#/components/schemas/ProductCategory"
+        imageUrl:
+          type: string
+          nullable: true
+        stock:
+          type: integer
+          nullable: true
+        digital:
+          type: boolean
+        featured:
+          type: boolean
+      required: [id, name, description, priceEur, category, digital, featured]
+
+    ProductListResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        total:
+          type: integer
+        page:
+          type: integer
+        totalPages:
+          type: integer
+      required: [products, total, page, totalPages]
+
+    # --- ORDERS ---
+    OrderItem:
+      type: object
+      properties:
+        productId:
+          type: integer
+          nullable: true
+        serviceId:
+          type: integer
+          nullable: true
+        bookingId:
+          type: integer
+          nullable: true
+        name:
+          type: string
+        quantity:
+          type: integer
+        priceEur:
+          type: number
+      required: [name, quantity, priceEur]
+
+    CreateOrderRequest:
+      type: object
+      properties:
+        customerEmail:
+          type: string
+        customerName:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItem"
+        notes:
+          type: string
+          nullable: true
+      required: [customerEmail, customerName, items]
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        customerEmail:
+          type: string
+        customerName:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItem"
+        totalEur:
+          type: number
+        status:
+          type: string
+          enum: [pending, confirmed, completed, cancelled]
+        createdAt:
+          type: string
+        notes:
+          type: string
+          nullable: true
+      required: [id, customerEmail, customerName, items, totalEur, status, createdAt]
+
+    # --- BOOKINGS ---
+    BookingServiceType:
+      type: string
+      enum: [lesson, coaching, studio]
+
+    TimeSlot:
+      type: object
+      properties:
+        date:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        available:
+          type: boolean
+      required: [date, startTime, endTime, available]
+
+    AvailabilityResponse:
+      type: object
+      properties:
+        slots:
+          type: array
+          items:
+            $ref: "#/components/schemas/TimeSlot"
+        serviceType:
+          $ref: "#/components/schemas/BookingServiceType"
+        month:
+          type: string
+      required: [slots, serviceType, month]
+
+    CreateBookingRequest:
+      type: object
+      properties:
+        serviceType:
+          $ref: "#/components/schemas/BookingServiceType"
+        date:
+          type: string
+        startTime:
+          type: string
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        notes:
+          type: string
+          nullable: true
+        durationHours:
+          type: integer
+          default: 1
+      required: [serviceType, date, startTime, customerName, customerEmail]
+
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+        serviceType:
+          $ref: "#/components/schemas/BookingServiceType"
+        date:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        notes:
+          type: string
+          nullable: true
+        priceEur:
+          type: number
+        status:
+          type: string
+          enum: [pending, confirmed, cancelled]
+        createdAt:
+          type: string
+      required: [id, serviceType, date, startTime, endTime, customerName, customerEmail, priceEur, status, createdAt]
+
+    # --- QUOTES ---
+    QuoteServiceType:
+      type: string
+      enum: [mixing, mastering, stem-mastering, production, mixing-mastering, string-arrangement, cowriting, guitar-solo]
+
+    EstimateQuoteRequest:
+      type: object
+      properties:
+        serviceType:
+          $ref: "#/components/schemas/QuoteServiceType"
+        songCount:
+          type: integer
+          default: 1
+        additionalServices:
+          type: array
+          items:
+            type: string
+          nullable: true
+      required: [serviceType, songCount]
+
+    QuoteEstimate:
+      type: object
+      properties:
+        serviceType:
+          $ref: "#/components/schemas/QuoteServiceType"
+        basePrice:
+          type: number
+        totalPrice:
+          type: number
+        songCount:
+          type: integer
+        breakdown:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              amount:
+                type: number
+            required: [label, amount]
+      required: [serviceType, basePrice, totalPrice, songCount, breakdown]
+
+    CreateQuoteRequest:
+      type: object
+      properties:
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        serviceType:
+          $ref: "#/components/schemas/QuoteServiceType"
+        songCount:
+          type: integer
+          default: 1
+        projectDescription:
+          type: string
+        genre:
+          type: string
+          nullable: true
+        budget:
+          type: number
+          nullable: true
+        referenceLinks:
+          type: string
+          nullable: true
+        additionalServices:
+          type: array
+          items:
+            type: string
+          nullable: true
+      required: [customerName, customerEmail, serviceType, songCount, projectDescription]
+
+    Quote:
+      type: object
+      properties:
+        id:
+          type: integer
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        serviceType:
+          $ref: "#/components/schemas/QuoteServiceType"
+        songCount:
+          type: integer
+        projectDescription:
+          type: string
+        genre:
+          type: string
+          nullable: true
+        budget:
+          type: number
+          nullable: true
+        estimatedPrice:
+          type: number
+        status:
+          type: string
+          enum: [pending, reviewed, accepted, declined]
+        createdAt:
+          type: string
+      required: [id, customerName, customerEmail, serviceType, songCount, projectDescription, estimatedPrice, status, createdAt]
+
+    # --- TESTIMONIALS ---
+    TestimonialType:
+      type: string
+      enum: [artist, student, all]
+
+    Testimonial:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        role:
+          type: string
+        quote:
+          type: string
+        type:
+          $ref: "#/components/schemas/TestimonialType"
+        featured:
+          type: boolean
+      required: [id, name, role, quote, type, featured]
+
+    TestimonialListResponse:
+      type: object
+      properties:
+        testimonials:
+          type: array
+          items:
+            $ref: "#/components/schemas/Testimonial"
+      required: [testimonials]
+
+    # --- PORTAL ---
+    PortalLesson:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        duration:
+          type: integer
+          description: Duration in minutes
+        topic:
+          type: string
+        level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        videoUrl:
+          type: string
+          description: Stream-only URL, not downloadable
+        thumbnailUrl:
+          type: string
+          nullable: true
+        publishedAt:
+          type: string
+      required: [id, title, description, duration, topic, level, videoUrl, publishedAt]
+
+    PortalLessonListResponse:
+      type: object
+      properties:
+        lessons:
+          type: array
+          items:
+            $ref: "#/components/schemas/PortalLesson"
+        total:
+          type: integer
+      required: [lessons, total]
+
+    PortalResource:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        fileUrl:
+          type: string
+        fileType:
+          type: string
+        sizeKb:
+          type: integer
+          nullable: true
+      required: [id, title, description, category, fileUrl, fileType]
+
+    PortalResourceListResponse:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: "#/components/schemas/PortalResource"
+      required: [resources]
+
+    PortalAccessRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        studentOf:
+          type: string
+          nullable: true
+      required: [name, email]
+
+    PortalAccessResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [granted, pending]
+        message:
+          type: string
+      required: [status, message]
+
+    # --- SERVICES ---
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        priceEur:
+          type: number
+        category:
+          type: string
+          enum: [lesson, coaching, studio, mixing, mastering, production, guitar-solo, arrangement]
+        durationHours:
+          type: number
+          nullable: true
+        unit:
+          type: string
+          description: "e.g., 'per song', 'per hour', 'per session'"
+      required: [id, name, description, priceEur, category, unit]
+
+    ServiceListResponse:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: "#/components/schemas/Service"
+      required: [services]

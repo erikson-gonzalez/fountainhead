@@ -1,0 +1,250 @@
+# 📋 Análisis completo del sitio web: thefountainhead.de
+
+---
+
+## 🏗️ ESTRUCTURA GENERAL DEL SITIO
+
+El sitio es un **WordPress** (con tema personalizado de fuente monoespaciada/estilo retro-musical) para Tom "Fountainhead" Geldschläger, guitarrista/compositor/productor alemán con base en Berlín. El logo es una llama roja.
+
+**Menú de navegación principal (2 filas):**
+| Fila 1 | Fila 2 |
+|--------|--------|
+| About | Producer & Engineer |
+| News | Prices |
+| Discography | Augmented Reality (externo) |
+| Live | |
+| Guitarist | |
+| Teacher | |
+
+---
+
+## 📄 SECCIONES Y CONTENIDO VITAL
+
+---
+
+### 1. 🏠 HOME (Página Principal)
+- **Hero:** Slider de imágenes a pantalla completa (múltiples fotos artísticas del músico con guitarra)
+- **Estilo visual:** Imágenes oscuras/dramáticas de alta calidad
+- **Footer:** `© 2026 Fountainhead`
+- **Tecnología:** Plugin Slider WD para el carrusel
+
+---
+
+### 2. 👤 ABOUT `/about/`
+**Tipo:** Página biográfica con texto + citas
+
+**Bio resumida:**
+Fountainhead es el alter ego de Tom Geldschläger. Con base en Berlín, ha trabajado con bandas como Belphegor, Marco Minnemann, Defeated Sanity, Obscura (álbum "Akroasis", incluyendo el épico de 15 minutos "Weltseele"). Es conocido por su estilo inimitable y por la guitarra sin trastes (fretless). Ha lanzado varios álbumes desde "Fear Is The Enemy" (2013). Su álbum más reciente es "Changeling" (2024), con más de 50 músicos invitados.
+
+**Endorsements actuales:**
+Aristides Guitars, Steinberg Software, Loxx Products, Engl Amplification, Neural DSP Plug-ins, Deadweald Audio Engineering, Elixir Strings, MONO cases, Bareknuckle Pickups
+
+**Sección de citas (Quotes) de artistas reconocidos:**
+- Christian Münzner (Obscura): "The Steve Vai of the new millennium"
+- Laurie Monk (truthinshredding.com): "Stunning, yes stunning music and guitar"
+- Richard Hallebeek: "I LOVE Fountainhead"
+- Mike Abdow (Fates Warning): "...most deserving of the title innovator"
+- Karl Sanders (Nile): "WOW! That's some beautiful guitar playing"
+- Ray Riendeau (Halford): "He's unique in a world of cliche guitarists"
+- Bill Bruce (Shotgun Messiah): "There is no one on this planet that can even attempt what he does!"
+
+---
+
+### 3. 📰 NEWS `/news/`
+**Tipo:** Blog/noticias con entradas cronológicas
+
+**Titulares de noticias recientes:**
+- Project Intrada in Cottbus
+- Finally, a website update
+- New Fountainhead album recordings: final phase
+- New Vianova album DONE
+- New project live premiere this monday!
+- "Oh hell" – a tv series
+- Tom appears on christmas album
+- Thunder & Lightning "F.E.A.R." released!
+- Brass version of Tom's signature guitar picks now available!
+- Tom guests on new Silence The Prince album
+- New service: orchestral arrangements
+- New endorsement with Bare knuckle Pickups
+- Exclusive new music on Tom's patreon NOW!
+- Collaboration between Tom & Thunder & Lightning (full-length album)
+- Extensive new interview for "shred ABC" YT series
+- Studio-time for new Fountainhead album has started!
+- Tom to contribute to Ingurgitating Oblivion's upcoming album
+- Tom now offering commercial string arrangements
+- Winspear to release new Fountainhead signature brass guitar picks
+- Intercepting Pattern's "The Encounter" now available on vinyl
+
+---
+
+### 4. 💿 DISCOGRAPHY `/albums/`
+**Tipo:** Archivo de álbumes paginado (9 páginas en total)
+
+**Estructura de cada entrada:**
+- Portada del álbum (imagen)
+- Nombre del artista + Título del álbum
+- Fecha de lanzamiento
+- Rol de Tom en el proyecto
+- Género musical
+
+**Álbumes más recientes (muestra):**
+| Álbum | Fecha | Rol | Género |
+|-------|-------|-----|--------|
+| Changeling – "Changeling" | 25.04.2025 | Writer, Arranger, Performer, Producer, Mixing | Prog/Technical Death Metal |
+| Pyre – "Burning // Blazing" | 04.04.2025 | Producer, Mixing/Mastering | Hardcore/Metalcore |
+| Leviathan – "Shrine Of Sacrifice" (Single) | 09.01.2025 | Mixing/Mastering, Guest Soloist | Technical Death Metal |
+| Thunder And Lightning – "Of Wrath And Ruin" | 15.11.2024 | Lead Guitar & Solos | Heavy Metal |
+| Amuse To Death – "Phantasmagoria" | 08.11.2024 | Production, Mix/Master, fretted & fretless guitar | Swing-Metal |
+| Merely Minds EP | 10.10.2024 | Production, Mixing/Mastering | Pop/Rock |
+| Ingurgitating Oblivion – "Ontology Of Nought" | 27.09.2024 | Fretted & Fretless Guitar Solos | Progressive Death Metal |
+| Sayas – "There Where Light Remains" (Single) | 20.05.2024 | Mixing/Mastering | Death Metal |
+| Hannes Grossmann – "Echoes Of Eternity" | 09.02.2024 | Guest guitar solo | — |
+| The Ritual Aura – "Heresiarch" | 10.11.2023 | fretted & fretless guest solos | — |
+
+---
+
+### 5. 🎤 LIVE `/live/`
+**Tipo:** Historial de conciertos organizado por artista/proyecto
+
+**Email de booking:** `thefountainhead@gmx.net`
+**Estado actual:** "No shows booked at the moment"
+
+**Proyectos/artistas con fechas:**
+- **Ally The Fiddle** – Giras Alemania (2020)
+- **Belphegor** – Tours en Europa, América Latina, México, Costa Rica, El Salvador, Guatemala, Austria, Finlandia, UK (Wacken, Bloodstock), Francia (2022)
+- **Defeated Sanity** – "Bloodletting Tour 2017" – USA (28 fechas)
+- **Fountainhead** – India Masterclass Tour 2023 (9 ciudades), India 2018 (4 ciudades), Hamburg Wacken Metal Academy 2020
+- **Guca Meets Wacken** – Berlín 2022
+- **Project Intrada** – Cottbus 2023
+- **Thunder & Lightning** – Múltiples shows en Alemania (2020–2024)
+
+---
+
+### 6. 🎸 GUITARIST `/guitarist/`
+**Tipo:** Página de servicios de sesión de guitarra
+
+**Servicios:**
+- Session guitar & guest solos (eléctrica, acústica, fretless, oud árabe)
+- Grabado en su estudio en Berlín
+- Archivos entregados: pistas dry/wet mix-ready + DI tracks + video del take final
+
+**Tarifas (Guitarist):**
+- 1 solo de guitarra standalone: **300 EUR**
+- Proyectos multi-canción: precio por solo baja
+
+**Productos Signature:**
+- **Picks Fountainhead** por Winspear Instrumental (nylon y versión brass) — usados por Falling In Reverse y Nile
+- **Guitarras Signature** (fretted & fretless): actualmente con Aristides Instruments + Bareknuckle Pickups; previamente Soultool Guitars + GoodTone Pickups
+
+---
+
+### 7. 🎓 TEACHER `/teacher/`
+**Tipo:** Página de servicios de enseñanza
+
+**Servicios:**
+- **Lecciones individuales (1-on-1):** Berlín (presencial) o Skype/Zoom
+- Temas: técnica de guitarra, teoría musical, songwriting, composición, producción musical, psicología de la interpretación
+- **Masterclasses/Clínicas:** disponible internacionalmente, escalables en tema y alcance
+
+**Tarifa lecciones:** 30 EUR/hora (vía PayPal) [nota: en Prices dice 45 EUR/hora]
+**Contacto masterclasses:** `thefountainhead@gmx.net`
+
+**Citas de alumnos:**
+- Christopher Johnson, Christopher Soriano, Daniel Bacskocky, Sebastian Müller, Martin Crzeskinky (reviews muy positivas)
+
+---
+
+### 8. 🎛️ PRODUCER & ENGINEER `/producer-engineer/`
+**Tipo:** Página de servicios de producción/mezcla/masterización
+
+**Servicios:**
+- Mixing & Mastering
+- Producción musical completa
+- Sesiones de grabación en Berlín
+- Arreglos de cuerdas
+
+**Tarifas:**
+- Mezcla + masterización (1 canción): **300 EUR**
+- Masterización sola (1 canción): **30 EUR**
+- Stem-mastering (1 canción): **100 EUR**
+- Sesión de 8 horas en estudio Berlín: **200 EUR**
+
+**Citas de clientes:**
+- Guido Nerger (The Astronauts Return)
+- Ben Kettner (Requital, Liquid Fire)
+- Vianova
+- Andy La Rocque (King Diamond, Death) ⭐
+
+**GEAR completo listado en la página:**
+- Guitarras: Aristides 070 (fretted/fretless), Soultool Signatures, Jackson Dinky, Ibanez JEM555, Oud turco de 11 cuerdas, bajo Ibanez
+- Amplificación: Kemper Profiler, Engl Blackmore 100W, Hughes & Kettner, Mesa/Boogie, Neural DSP (Nolly, Gojira, Mesa Mark IIc+, Cory Wong, etc.), Bogren Digital EVH
+- Software: Slate Digital, SSL Bundle, Softube, Fabfilter, Waves, Izotope Ozone 11, Steinberg Cubase 10, Wavelab 9
+- Monitores: A.D.A.M. A7X, Linn custom, Avantone Mix-cubes
+- Interface: Steinberg UR28M + CC121
+
+---
+
+### 9. 💰 PRICES `/prices/`
+**Tipo:** Página de precios consolidada + Aviso legal
+
+**Tarifas (listado completo y actualizado):**
+| Servicio | Precio |
+|----------|--------|
+| Guitar solo (fretted o fretless) | 300 EUR |
+| Lección 1 hora (videollamada) | 45 EUR |
+| Creative coaching (1 sesión) | 50 EUR |
+| Grabación en estudio (~8 horas, Berlín) | 200 EUR |
+| Mixing + mastering (1 canción) | 300 EUR |
+| Mastering (1 canción) | 30 EUR |
+| Stem-mastering (1 canción) | 100 EUR |
+| Co-writing/composición (1 canción) | 300 EUR |
+| Arreglos de cuerdas (1 canción) | 200 EUR |
+
+**Aviso Legal / Impressum:**
+- Nombre: Tom Geldschläger — Fountainhead
+- Dirección: Scheiblerstrasse 4, 12437 Berlín (y también: Stralauer Allee 20, 10245 Berlín)
+- Teléfono: 03066300766
+- Email: thefountainhead@gmx.net
+- VAT: 65 813 728 097
+- Kleinunternehmer (sin IVA)
+- Política de privacidad: Google Analytics, Facebook Social Plugins, Newsletter
+
+---
+
+### 10. 🔗 AUGMENTED REALITY (enlace externo)
+Redirige a `http://beyondthestrings.de` — proyecto externo.
+
+---
+
+## 🔧 DATOS TÉCNICOS DEL SITIO
+
+| Aspecto | Detalle |
+|---------|---------|
+| CMS | WordPress |
+| Constructor visual | Elementor (detectado en admin) |
+| Slider | Plugin "Slider WD" |
+| Fuente tipográfica | Monoespaciada (estilo máquina de escribir/retro) |
+| Colores | Blanco/negro con acento rojo oscuro (llama del logo) |
+| Idioma | Inglés (con sección legal en alemán) |
+| Footer | Minimalista: sólo "© 2026 Fountainhead" |
+| Analítica | Google Analytics |
+| Social | Facebook Social Plugins |
+| Custom Post Types | Albums, Portfolio Items |
+
+---
+
+## 📌 RESUMEN EJECUTIVO PARA LA NUEVA WEB
+
+Para replicar este sitio deberás cubrir estas **9 páginas principales** con los siguientes bloques de contenido clave:
+
+1. **Home** — Hero full-screen con slider fotográfico dramático
+2. **About** — Bio + foto + endorsements + citas de artistas famosos
+3. **News** — Blog de noticias/actualizaciones
+4. **Discography** — Archivo de lanzamientos con imagen, rol, fecha y género
+5. **Live** — Histórico de conciertos por artista/tour con fecha, ciudad y venue
+6. **Guitarist** — Servicios de sesión + tarifas + productos signature
+7. **Teacher** — Lecciones, masterclasses + tarifas + testimonios de alumnos
+8. **Producer & Engineer** — Servicios de producción/mix/master + quotes de clientes + gear list
+9. **Prices** — Tabla de precios unificada + aviso legal (Impressum obligatorio en Alemania)
+
+**Contacto central del sitio:** `thefountainhead@gmx.net`
