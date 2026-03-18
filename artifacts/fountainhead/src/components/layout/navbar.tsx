@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X, ShoppingBag, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/store/cart-store";
+import { useAuthStore } from "@/stores/auth-store";
 
 const LINKS = [
   { label: "About", href: "/about" },
@@ -12,7 +13,6 @@ const LINKS = [
   { label: "Services", href: "/services" },
   { label: "Shop", href: "/shop" },
   { label: "Book", href: "/book" },
-  { label: "Portal", href: "/portal" },
 ];
 
 export function Navbar() {
@@ -21,6 +21,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const cartItems = useCartStore((state) => state.items);
   const setIsCartOpen = useCartStore((state) => state.setIsOpen);
+  const user = useAuthStore((s) => s.user);
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -71,6 +72,23 @@ export function Navbar() {
             </Link>
           ))}
           
+          <Link
+            href="/portal"
+            className={cn(
+              "relative p-2 transition-colors",
+              location.startsWith("/portal") ? "text-primary" : "text-muted-foreground hover:text-primary"
+            )}
+            title={user ? `Signed in as ${user.name}` : "Sign in"}
+          >
+            {user ? (
+              <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary">
+                <User className="w-3.5 h-3.5" />
+              </div>
+            ) : (
+              <User className="w-5 h-5" />
+            )}
+          </Link>
+
           <button 
             onClick={() => setIsCartOpen(true)}
             className="relative p-2 text-muted-foreground hover:text-primary transition-colors"
@@ -126,6 +144,16 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Link
+            href="/portal"
+            onClick={() => setMobileOpen(false)}
+            className={cn(
+              "text-2xl font-display tracking-widest uppercase transition-colors flex items-center gap-3",
+              location.startsWith("/portal") ? "text-primary" : "text-foreground hover:text-primary"
+            )}
+          >
+            {user ? user.name : "Sign In"}
+          </Link>
         </div>
       </motion.div>
     </header>
