@@ -55,7 +55,7 @@ export default function QuoteBuilder() {
   };
 
   return (
-    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-3xl mx-auto min-h-screen">
+    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <div className="text-center mb-12">
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase tracking-wider">Quote Builder</h1>
         <p className="text-muted-foreground">Get an instant estimate for your next project.</p>

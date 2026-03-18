@@ -6,7 +6,7 @@ export default function News() {
   const { data, isLoading } = useListNews({ limit: 10 });
 
   return (
-    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto min-h-screen">
+    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <h1 className="font-display text-5xl font-bold text-white uppercase tracking-wider mb-12">Latest Transmission</h1>
 
       {isLoading ? (

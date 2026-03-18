@@ -7,7 +7,7 @@ export default function Services() {
   const { data, isLoading } = useListServices();
 
   return (
-    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-5xl mx-auto min-h-screen">
+    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <div className="text-center mb-16">
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white uppercase tracking-wider mb-6">Rates & Services</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto text-lg">Transparent pricing for premium audio production and education. Bundle discounts available upon request.</p>

@@ -15,7 +15,7 @@ export default function Live() {
   const past = SHOWS.filter(s => s.status === "Past");
 
   return (
-    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-5xl mx-auto min-h-screen">
+    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
         <div>
           <h1 className="font-display text-5xl font-bold text-white uppercase tracking-wider mb-2">Live Dates</h1>

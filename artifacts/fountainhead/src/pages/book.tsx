@@ -54,7 +54,7 @@ export default function Book() {
   };
 
   return (
-    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-5xl mx-auto min-h-screen">
+    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <div className="text-center mb-16">
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase tracking-wider">Book a Session</h1>
         <p className="text-muted-foreground">Schedule your 1-on-1 session or studio time.</p>

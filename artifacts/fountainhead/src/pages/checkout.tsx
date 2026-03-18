@@ -74,7 +74,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-6xl mx-auto min-h-screen">
+    <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <h1 className="font-display text-4xl font-bold text-white mb-12 uppercase tracking-wider border-b border-white/10 pb-6">Checkout</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
