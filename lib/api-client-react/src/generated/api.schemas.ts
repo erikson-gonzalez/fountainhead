@@ -182,6 +182,7 @@ export const QuoteServiceType = {
 export interface EstimateQuoteRequest {
   serviceType: QuoteServiceType;
   songCount: number;
+  songsOver6Min?: number | null;
   additionalServices?: string[] | null;
 }
 
@@ -350,6 +351,7 @@ export type ListAlbumsParams = {
   genre?: string;
   page?: number;
   limit?: number;
+  featured?: boolean;
 };
 
 export type ListNewsParams = {

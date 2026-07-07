@@ -1,31 +1,14 @@
-import { db, albumsTable, newsTable, productsTable, testimonialsTable, servicesTable, portalLessonsTable, portalResourcesTable } from "@workspace/db";
-import { sql } from "drizzle-orm";
+import { db, albumsTable, newsTable, productsTable, testimonialsTable, servicesTable, bookOfferingsTable, portalLessonsTable, portalResourcesTable, artistInfoTable, liveShowsTable } from "@workspace/db";
+import { eq, sql } from "drizzle-orm";
 
 async function seed() {
   console.log("🌱 Seeding database...");
 
-  // Clear all tables
-  await db.execute(sql`TRUNCATE albums, news, products, testimonials, services, portal_lessons, portal_resources RESTART IDENTITY CASCADE`);
+  // Clear all tables EXCEPT albums — albums are managed via admin and must not be wiped
+  await db.execute(sql`TRUNCATE news, products, testimonials, services, book_offerings, portal_lessons, portal_resources, live_shows RESTART IDENTITY CASCADE`);
 
-  // --- ALBUMS ---
-  await db.insert(albumsTable).values([
-    { artist: "Changeling", title: "Changeling", releaseDate: "2025-04-25", role: "Writer, Arranger, Performer, Producer, Mixing", genre: "Prog/Technical Death Metal", featured: true },
-    { artist: "Pyre", title: "Burning // Blazing", releaseDate: "2025-04-04", role: "Producer, Mixing/Mastering", genre: "Hardcore/Metalcore", featured: false },
-    { artist: "Leviathan", title: "Shrine Of Sacrifice (Single)", releaseDate: "2025-01-09", role: "Mixing/Mastering, Guest Soloist", genre: "Technical Death Metal", featured: false },
-    { artist: "Thunder And Lightning", title: "Of Wrath And Ruin", releaseDate: "2024-11-15", role: "Lead Guitar & Solos", genre: "Heavy Metal", featured: true },
-    { artist: "Amuse To Death", title: "Phantasmagoria", releaseDate: "2024-11-08", role: "Production, Mix/Master, fretted & fretless guitar", genre: "Swing-Metal", featured: false },
-    { artist: "Merely Minds", title: "EP", releaseDate: "2024-10-10", role: "Production, Mixing/Mastering", genre: "Pop/Rock", featured: false },
-    { artist: "Ingurgitating Oblivion", title: "Ontology Of Nought", releaseDate: "2024-09-27", role: "Fretted & Fretless Guitar Solos", genre: "Progressive Death Metal", featured: true },
-    { artist: "Sayas", title: "There Where Light Remains (Single)", releaseDate: "2024-05-20", role: "Mixing/Mastering", genre: "Death Metal", featured: false },
-    { artist: "Hannes Grossmann", title: "Echoes Of Eternity", releaseDate: "2024-02-09", role: "Guest guitar solo", genre: "Progressive Metal", featured: false },
-    { artist: "The Ritual Aura", title: "Heresiarch", releaseDate: "2023-11-10", role: "Fretted & fretless guest solos", genre: "Death Metal", featured: false },
-    { artist: "Fountainhead", title: "Changeling", releaseDate: "2024-01-01", role: "Writer, Arranger, Performer, Producer, Mixing, Mastering", genre: "Experimental/Progressive Metal", featured: true, description: "The most ambitious Fountainhead album yet, featuring over 50 guest musicians." },
-    { artist: "Obscura", title: "Akroasis", releaseDate: "2016-02-05", role: "Lead Guitar (incl. 15-min epic 'Weltseele')", genre: "Technical Death Metal", featured: true },
-    { artist: "Defeated Sanity", title: "Passages Into Deformity", releaseDate: "2013-01-01", role: "Guitars, Production", genre: "Brutal Death Metal", featured: false },
-    { artist: "Belphegor", title: "Conjuring The Dead", releaseDate: "2014-08-08", role: "Live Guitar", genre: "Black/Death Metal", featured: false },
-    { artist: "Fountainhead", title: "Fear Is The Enemy", releaseDate: "2013-01-01", role: "Writer, Performer, Producer", genre: "Progressive Metal", featured: false, description: "Fountainhead debut album — the beginning of a unique sonic journey." },
-  ]);
-  console.log("✅ Albums seeded");
+  // --- ALBUMS --- (not touched; add/edit via admin Música tab)
+  console.log("✅ Albums preserved (managed via admin)");
 
   // --- TESTIMONIALS ---
   await db.insert(testimonialsTable).values([
@@ -123,113 +106,54 @@ async function seed() {
 
   // --- PRODUCTS ---
   await db.insert(productsTable).values([
-    {
-      name: "Fountainhead Signature Pick — Nylon (Pack of 6)",
-      description: "The original Fountainhead signature pick by Winspear Instrumental. Ultra-precise attack, warm articulation. Used by Tom live and in the studio. As featured in Falling In Reverse and Nile.",
-      priceEur: "18.00",
-      category: "picks",
-      featured: true,
-      digital: false,
-      stock: 50,
-    },
-    {
-      name: "Fountainhead Signature Pick — Brass (Pack of 3)",
-      description: "The premium brass edition of Tom's signature pick. Heavier feel, percussive attack, extraordinary sustain. Limited run — collector's item.",
-      priceEur: "28.00",
-      category: "picks",
-      featured: true,
-      digital: false,
-      stock: 30,
-    },
-    {
-      name: "Fountainhead T-Shirt — Flame Logo (Black)",
-      description: "Premium heavyweight cotton t-shirt with the iconic Fountainhead flame logo screen-printed in crimson red on black. Available in S, M, L, XL, XXL.",
-      priceEur: "25.00",
-      category: "merch",
-      featured: true,
-      digital: false,
-      stock: 100,
-    },
-    {
-      name: "Fountainhead Hoodie — Flame Logo",
-      description: "Heavy-duty pullover hoodie with embroidered flame logo. Dark charcoal grey, unisex fit. Perfect for those cold Berlin rehearsals.",
-      priceEur: "55.00",
-      category: "merch",
-      featured: false,
-      digital: false,
-      stock: 40,
-    },
-    {
-      name: "Fretless Guitar Masterclass — Complete Course",
-      description: "Tom's definitive guide to fretless guitar. 8+ hours of video lessons covering technique, intonation, vibrato, style, and original compositions. Stream in your student portal.",
-      priceEur: "149.00",
-      category: "courses",
-      featured: true,
-      digital: true,
-      stock: null,
-    },
-    {
-      name: "Advanced Metal Guitar Techniques — Online Course",
-      description: "Deep dive into advanced metal guitar: sweep picking, tapping, hybrid picking, exotic scales, and composing for technical metal. 6 hours of content.",
-      priceEur: "99.00",
-      category: "courses",
-      featured: true,
-      digital: true,
-      stock: null,
-    },
-    {
-      name: "Guitar Composition & Songwriting — Course",
-      description: "Learn Tom's approach to writing compelling guitar-driven compositions. From riff construction to full arrangement — the complete creative process.",
-      priceEur: "79.00",
-      category: "courses",
-      featured: false,
-      digital: true,
-      stock: null,
-    },
-    {
-      name: "Death Metal Production Blueprint — Sample Pack",
-      description: "Professional drum samples, DI guitar tones, bass samples and FX chains used in Tom's productions. DAW-agnostic. 4GB of high-quality audio.",
-      priceEur: "49.00",
-      category: "sample-packs",
-      featured: true,
-      digital: true,
-      stock: null,
-    },
-    {
-      name: "Fretless Guitar Tones — Sample Pack",
-      description: "Authentic fretless guitar phrases, loops and one-shots in various styles — from ambient to death metal. Unique sounds you won't find anywhere else.",
-      priceEur: "35.00",
-      category: "sample-packs",
-      featured: true,
-      digital: true,
-      stock: null,
-    },
-    {
-      name: "Progressive Metal Drum MIDI Pack",
-      description: "MIDI drum patterns and grooves covering progressive, technical, and experimental metal styles. 200+ patterns, all humanized.",
-      priceEur: "29.00",
-      category: "sample-packs",
-      featured: false,
-      digital: true,
-      stock: null,
-    },
+    { name: "Fountainhead Signature Pick — Nylon (Pack of 6)", description: "The original Fountainhead signature pick by Winspear Instrumental. Ultra-precise attack, warm articulation. Used by Tom live and in the studio. As featured in Falling In Reverse and Nile.", priceEur: "18.00", category: "picks", featured: true, digital: false, stock: 50, deliveryType: "physical" },
+    { name: "Fountainhead Signature Pick — Brass (Pack of 3)", description: "The premium brass edition of Tom's signature pick. Heavier feel, percussive attack, extraordinary sustain. Limited run — collector's item.", priceEur: "28.00", category: "picks", featured: true, digital: false, stock: 30, deliveryType: "physical" },
+    { name: "Fountainhead T-Shirt — Flame Logo (Black)", description: "Premium heavyweight cotton t-shirt with the iconic Fountainhead flame logo screen-printed in crimson red on black. Available in S, M, L, XL, XXL.", priceEur: "25.00", category: "merch", featured: true, digital: false, stock: 100, deliveryType: "physical" },
+    { name: "Fountainhead Hoodie — Flame Logo", description: "Heavy-duty pullover hoodie with embroidered flame logo. Dark charcoal grey, unisex fit. Perfect for those cold Berlin rehearsals.", priceEur: "55.00", category: "merch", featured: false, digital: false, stock: 40, deliveryType: "physical" },
+    { name: "Fretless Guitar Masterclass — Complete Course", description: "Tom's definitive guide to fretless guitar. 8+ hours of video lessons covering technique, intonation, vibrato, style, and original compositions. Stream in your student portal.", priceEur: "149.00", category: "courses", featured: true, digital: true, stock: null, deliveryType: "stream" },
+    { name: "Advanced Metal Guitar Techniques — Online Course", description: "Deep dive into advanced metal guitar: sweep picking, tapping, hybrid picking, exotic scales, and composing for technical metal. 6 hours of content.", priceEur: "99.00", category: "courses", featured: true, digital: true, stock: null, deliveryType: "stream" },
+    { name: "Guitar Composition & Songwriting — Course", description: "Learn Tom's approach to writing compelling guitar-driven compositions. From riff construction to full arrangement — the complete creative process.", priceEur: "79.00", category: "courses", featured: false, digital: true, stock: null, deliveryType: "stream" },
+    { name: "Death Metal Production Blueprint — Sample Pack", description: "Professional drum samples, DI guitar tones, bass samples and FX chains used in Tom's productions. DAW-agnostic. 4GB of high-quality audio.", priceEur: "49.00", category: "sample-packs", featured: true, digital: true, stock: null, deliveryType: "download" },
+    { name: "Fretless Guitar Tones — Sample Pack", description: "Authentic fretless guitar phrases, loops and one-shots in various styles — from ambient to death metal. Unique sounds you won't find anywhere else.", priceEur: "35.00", category: "sample-packs", featured: true, digital: true, stock: null, deliveryType: "download" },
+    { name: "Progressive Metal Drum MIDI Pack", description: "MIDI drum patterns and grooves covering progressive, technical, and experimental metal styles. 200+ patterns, all humanized.", priceEur: "29.00", category: "sample-packs", featured: false, digital: true, stock: null, deliveryType: "download" },
   ]);
   console.log("✅ Products seeded");
 
-  // --- SERVICES ---
+  // --- SERVICES (for /services page - production/engineering) ---
   await db.insert(servicesTable).values([
-    { name: "Guitar Lesson (1 hour)", description: "1-on-1 guitar lesson via Zoom/Skype or in-person in Berlin. Topics: technique, theory, songwriting, composition, performance psychology.", priceEur: "45.00", category: "lesson", durationHours: "1", unit: "per hour" },
-    { name: "Creative Coaching (1 session)", description: "A focused creative coaching session to unlock your musical potential. Song development, artistic direction, overcoming creative blocks.", priceEur: "50.00", category: "coaching", durationHours: "1", unit: "per session" },
-    { name: "Studio Recording Session (Berlin)", description: "Full 8-hour recording session in Tom's Berlin studio. Professional gear, expert production, dry/wet/DI tracks delivered.", priceEur: "200.00", category: "studio", durationHours: "8", unit: "per 8-hour session" },
-    { name: "Mixing & Mastering (1 song)", description: "Complete mix and master of one track. Full revision cycle, stems returned, streaming and CD-ready masters.", priceEur: "300.00", category: "mixing", durationHours: null, unit: "per song" },
-    { name: "Mastering Only (1 song)", description: "Mastering of a finished mix. Loudness optimization, format delivery, reference playback.", priceEur: "30.00", category: "mastering", durationHours: null, unit: "per song" },
-    { name: "Stem Mastering (1 song)", description: "Stem-by-stem mastering for maximum mix-to-master translation. Ideal for complex arrangements.", priceEur: "100.00", category: "mastering", durationHours: null, unit: "per song" },
-    { name: "Guitar Solo (Session Recording)", description: "Professional guest guitar solo recorded in Berlin. Fretted or fretless. Delivered with dry, wet, and DI tracks + video of the final take.", priceEur: "300.00", category: "guitar-solo", durationHours: null, unit: "per solo" },
-    { name: "Co-writing / Composition (1 song)", description: "Full co-writing service. Tom joins as a creative partner on your track — from initial ideas to final arrangement.", priceEur: "300.00", category: "production", durationHours: null, unit: "per song" },
-    { name: "String Arrangements (1 song)", description: "Professional orchestral and string arrangements for your recordings. Score + MIDI + audio mockup delivered.", priceEur: "200.00", category: "arrangement", durationHours: null, unit: "per song" },
-    { name: "Full Production (1 song)", description: "Complete music production from scratch: arrangement, recording, mixing and mastering. Tom handles it all.", priceEur: "500.00", category: "production", durationHours: null, unit: "per song" },
+    { name: "Mixing & Mastering (1 song)", description: "Complete mix and master of one track. Full revision cycle, stems returned, streaming and CD-ready masters.", priceEur: "300.00", category: "mixing", tag: "Mixing", icon: "Sliders", durationHours: null, unit: "per song" },
+    { name: "Mastering Only (1 song)", description: "Mastering of a finished mix. Loudness optimization, format delivery, reference playback.", priceEur: "30.00", category: "mastering", tag: "Mastering", icon: "Disc3", durationHours: null, unit: "per song" },
+    { name: "Stem Mastering (1 song)", description: "Stem-by-stem mastering for maximum mix-to-master translation. Ideal for complex arrangements.", priceEur: "100.00", category: "stem-mastering", tag: "Mastering", icon: "Disc3", durationHours: null, unit: "per song" },
+    { name: "Guitar Solo (Session Recording)", description: "Professional guest guitar solo recorded in Berlin. Fretted or fretless. Delivered with dry, wet, and DI tracks + video of the final take.", priceEur: "300.00", category: "guitar-solo", tag: "Guitar", icon: "Guitar", durationHours: null, unit: "per solo" },
+    { name: "Co-writing / Composition (1 song)", description: "Full co-writing service. Tom joins as a creative partner on your track — from initial ideas to final arrangement.", priceEur: "300.00", category: "cowriting", tag: "Production", icon: "Music4", durationHours: null, unit: "per song" },
+    { name: "String Arrangements (1 song)", description: "Professional orchestral and string arrangements for your recordings. Score + MIDI + audio mockup delivered.", priceEur: "200.00", category: "string-arrangement", tag: "Arrangements", icon: "Music4", durationHours: null, unit: "per song" },
+    { name: "Full Production (1 song)", description: "Complete music production from scratch: arrangement, recording, mixing and mastering. Tom handles it all.", priceEur: "500.00", category: "production", tag: "Production", icon: "Music4", durationHours: null, unit: "per song" },
   ]);
   console.log("✅ Services seeded");
+
+  // --- BOOK OFFERINGS (for /book page) ---
+  await db.insert(bookOfferingsTable).values([
+    { name: "Guitar Lesson", description: "1-on-1 guitar lesson via Zoom/Skype or in-person in Berlin. Topics: technique, theory, songwriting, composition, performance psychology.", priceEur: "45.00", unit: "per hour", tag: "Education", icon: "BookOpen", imageUrl: null, linkType: "booking", sortOrder: "0" },
+    { name: "Creative Coaching", description: "A focused creative coaching session to unlock your musical potential. Song development, artistic direction, overcoming creative blocks.", priceEur: "50.00", unit: "per session", tag: "Coaching", icon: "Lightbulb", imageUrl: null, linkType: "booking", sortOrder: "1" },
+    { name: "Studio Recording Session (Berlin)", description: "Full 8-hour recording session in Tom's Berlin studio. Professional gear, expert production, dry/wet/DI tracks delivered.", priceEur: "200.00", unit: "per 8-hour session", tag: "Studio", icon: "Mic2", imageUrl: null, linkType: "booking", sortOrder: "2" },
+    { name: "String Arrangements", description: "Professional orchestral and string arrangements for your recordings. Score + MIDI + audio mockup delivered.", priceEur: "200.00", unit: "per song", tag: "Arrangements", icon: "Music4", imageUrl: null, linkType: "quote", sortOrder: "3" },
+  ]);
+  console.log("✅ Book offerings seeded");
+
+  // --- LIVE SHOWS ---
+  await db.insert(liveShowsTable).values([
+    { date: "2025-06-14", venue: "Wacken Open Air", city: "Wacken, DE", project: "Fountainhead", ticketUrl: null },
+    { date: "2025-08-21", venue: "Tech Fest", city: "Newark, UK", project: "Guest Soloist", ticketUrl: null },
+    { date: "2024-11-10", venue: "Euroblast", city: "Bristol, UK", project: "Fountainhead", ticketUrl: null },
+    { date: "2024-09-05", venue: "ProgPower Europe", city: "Atlanta, US", project: "Masterclass", ticketUrl: null },
+    { date: "2024-06-15", venue: "India Masterclass Tour — Mumbai", city: "Mumbai, IN", project: "Fountainhead", ticketUrl: null },
+    { date: "2023-11-01", venue: "Project Intrada", city: "Cottbus, DE", project: "Fountainhead", ticketUrl: null },
+    { date: "2023-08-20", venue: "Wacken Metal Academy", city: "Hamburg, DE", project: "Fountainhead", ticketUrl: null },
+    { date: "2022-07-30", venue: "Guca Meets Wacken", city: "Berlin, DE", project: "Fountainhead", ticketUrl: null },
+    { date: "2022-05-12", venue: "Bloodstock", city: "Derby, UK", project: "Belphegor", ticketUrl: null },
+    { date: "2020-08-01", venue: "Wacken Open Air", city: "Wacken, DE", project: "Belphegor", ticketUrl: null },
+  ]);
+  console.log("✅ Live shows seeded");
 
   // --- PORTAL LESSONS ---
   await db.insert(portalLessonsTable).values([
@@ -348,6 +272,62 @@ async function seed() {
     },
   ]);
   console.log("✅ Portal resources seeded");
+
+  // --- ARTIST INFO (insert or update when empty) ---
+  const FULL_BIO = `Renowned worldwide for his pioneering work on the fretless guitar, Tom Geldschläger (aka Fountainhead) is a multi-instrumentalist, producer, and mixing engineer operating out of his studio in Berlin, Germany.
+
+He has contributed to critically acclaimed records by artists such as Obscura, Defeated Sanity, Ray Riendeau, and many others, bridging the gap between extreme metal, jazz fusion, and cinematic soundscapes.
+
+As an educator, Tom has conducted masterclasses across the globe and built a dedicated community of students exploring advanced guitar techniques and creative production.`;
+
+  const defaultArtistInfo = {
+    tagline: "Berlin-based guitarist, producer & mixing engineer",
+    bio: FULL_BIO,
+    heroTagline: "Berlin-based virtuoso guitarist, producer, and mixing engineer. Pushing boundaries in modern metal.",
+    heroTitlePrefix: "Mastering the",
+    heroTitleHighlight: "Fretless",
+    heroTitleSuffix: "Dimension",
+    testimonialsSectionTitle: "Industry Voices",
+    testimonialsSectionSubtitle: "What top artists and students say about working with Fountainhead.",
+    aboutHeading: "TOM GELDSCHLÄGER",
+    aboutSubheading: "Fountainhead",
+    endorsements: "Aristides Guitars, Steinberg, Engl Amplification, Neural DSP, Bare Knuckle Pickups, Elixir Strings, MONO",
+    musicLinks: "",
+    contactEmail: "thefountainhead@gmx.net",
+    contactPhone: "03066300766",
+    contactAddress: "Scheiblerstrasse 4, 12437 Berlin",
+  };
+
+  const [existingArtistInfo] = await db.select().from(artistInfoTable).limit(1);
+  if (!existingArtistInfo) {
+    await db.insert(artistInfoTable).values({
+      tagline: "Berlin-based guitarist, producer & mixing engineer",
+      bio: "Renowned worldwide for his pioneering work on the fretless guitar, Tom Geldschläger (aka Fountainhead) is a multi-instrumentalist, producer, and mixing engineer operating out of his studio in Berlin, Germany.\n\nHe has contributed to critically acclaimed records by artists such as Obscura, Defeated Sanity, Ray Riendeau, and many others, bridging the gap between extreme metal, jazz fusion, and cinematic soundscapes.\n\nAs an educator, Tom has conducted masterclasses across the globe and built a dedicated community of students exploring advanced guitar techniques and creative production.",
+      heroTagline: "Berlin-based virtuoso guitarist, producer, and mixing engineer. Pushing boundaries in modern metal.",
+      heroTitlePrefix: "Mastering the",
+      heroTitleHighlight: "Fretless",
+      heroTitleSuffix: "Dimension",
+      testimonialsSectionTitle: "Industry Voices",
+      testimonialsSectionSubtitle: "What top artists and students say about working with Fountainhead.",
+      aboutHeading: "TOM GELDSCHLÄGER",
+      aboutSubheading: "Fountainhead",
+      endorsements: "Aristides Guitars, Steinberg, Engl Amplification, Neural DSP, Bare Knuckle Pickups, Elixir Strings, MONO",
+      musicLinks: "",
+      contactEmail: "thefountainhead@gmx.net",
+      contactPhone: "03066300766",
+      contactAddress: "Scheiblerstrasse 4, 12437 Berlin",
+    });
+    console.log("✅ Artist info seeded");
+  } else if (existingArtistInfo && (!existingArtistInfo.bio || existingArtistInfo.bio.length < 100)) {
+    const fullBio = "Renowned worldwide for his pioneering work on the fretless guitar, Tom Geldschläger (aka Fountainhead) is a multi-instrumentalist, producer, and mixing engineer operating out of his studio in Berlin, Germany.\n\nHe has contributed to critically acclaimed records by artists such as Obscura, Defeated Sanity, Ray Riendeau, and many others, bridging the gap between extreme metal, jazz fusion, and cinematic soundscapes.\n\nAs an educator, Tom has conducted masterclasses across the globe and built a dedicated community of students exploring advanced guitar techniques and creative production.";
+    await db.update(artistInfoTable).set({
+      bio: fullBio,
+      tagline: existingArtistInfo.tagline || "Berlin-based guitarist, producer & mixing engineer",
+      heroTagline: existingArtistInfo.heroTagline || "Berlin-based virtuoso guitarist, producer, and mixing engineer. Pushing boundaries in modern metal.",
+      updatedAt: new Date(),
+    }).where(eq(artistInfoTable.id, existingArtistInfo.id));
+    console.log("✅ Artist info updated (bio was empty)");
+  }
 
   console.log("🎸 Database seeded successfully!");
   process.exit(0);

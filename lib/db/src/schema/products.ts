@@ -12,6 +12,8 @@ export const productsTable = pgTable("products", {
   imageUrl: text("image_url"),
   stock: integer("stock"),
   digital: boolean("digital").notNull().default(false),
+  /** physical = envío; download = descargable; stream = cursos en portal */
+  deliveryType: text("delivery_type"),
   featured: boolean("featured").notNull().default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

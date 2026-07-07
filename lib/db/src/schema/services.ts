@@ -9,6 +9,8 @@ export const servicesTable = pgTable("services", {
   description: text("description").notNull(),
   priceEur: numeric("price_eur", { precision: 10, scale: 2 }).notNull(),
   category: text("category").notNull(),
+  tag: text("tag"),
+  icon: text("icon"),
   durationHours: numeric("duration_hours", { precision: 4, scale: 1 }),
   unit: text("unit").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

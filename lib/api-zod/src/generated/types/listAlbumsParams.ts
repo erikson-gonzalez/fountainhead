@@ -9,6 +9,7 @@
 export type ListAlbumsParams = {
   role?: string;
   genre?: string;
+  featured?: boolean;
   page?: number;
   limit?: number;
 };

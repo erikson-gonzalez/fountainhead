@@ -4,9 +4,16 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
+    "dev": "pnpm --parallel -r --filter \"@workspace/api\" --filter \"@workspace/web\" run dev",
+    "seed": "pnpm --filter @workspace/scripts run seed",
+    "db:seed-admin": "pnpm --filter @workspace/scripts run seed-admin",
+    "db:seed-artist-info": "pnpm --filter @workspace/scripts run seed-artist-info",
+    "db:seed-books": "pnpm --filter @workspace/scripts run seed-book-offerings",
+    "push": "pnpm --filter @workspace/db run push",
+    "codegen": "pnpm --filter @workspace/api-spec run codegen",
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./apps/**\" --filter \"./scripts\" --if-present run typecheck"
   },
   "private": true,
   "devDependencies": {

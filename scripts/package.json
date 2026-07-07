@@ -6,13 +6,18 @@
   "scripts": {
     "hello": "tsx ./src/hello.ts",
     "seed": "tsx ./src/seed.ts",
+    "seed-admin": "tsx ./src/seed-admin.ts",
+    "seed-artist-info": "tsx ./src/seed-artist-info.ts",
+    "seed-book-offerings": "tsx ./src/seed-book-offerings.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@workspace/db": "workspace:*",
+    "bcryptjs": "^2.4.3",
     "drizzle-orm": "catalog:"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "catalog:",
     "tsx": "catalog:"
   }

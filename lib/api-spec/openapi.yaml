@@ -67,6 +67,10 @@ paths:
           schema:
             type: integer
             default: 12
+        - name: featured
+          in: query
+          schema:
+            type: boolean
       responses:
         "200":
           description: List of albums
@@ -452,6 +456,9 @@ components:
           nullable: true
         featured:
           type: boolean
+        spotifyEmbedUrl:
+          type: string
+          nullable: true
       required: [id, artist, title, releaseDate, role, genre, featured]
 
     AlbumListResponse:
@@ -707,6 +714,10 @@ components:
         songCount:
           type: integer
           default: 1
+        songsOver6Min:
+          type: integer
+          nullable: true
+          description: Number of songs longer than 6 minutes (+10% each)
         additionalServices:
           type: array
           items:
