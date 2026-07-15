@@ -42,7 +42,7 @@ export function AlbumList({
       </div>
 
       {loading ? (
-        <p className="text-sm text-slate-500">Cargando...</p>
+        <p className="text-sm text-slate-500">Loading...</p>
       ) : albums.length === 0 ? (
         <p className="text-sm text-slate-500 italic">No hay material.</p>
       ) : (

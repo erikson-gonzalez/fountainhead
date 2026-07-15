@@ -191,7 +191,7 @@ export function AdminTestimonials() {
             </Button>
           </div>
           {loading ? (
-            <p className="text-sm text-slate-500">Cargando...</p>
+            <p className="text-sm text-slate-500">Loading...</p>
           ) : loadError ? (
             <div className="p-4 rounded-lg bg-red-50 border border-red-200">
               <p className="text-sm text-red-700 mb-2">{loadError}</p>
@@ -293,7 +293,7 @@ export function AdminTestimonials() {
             </div>
             <DialogFooter className="gap-2 sm:gap-0 pt-4">
               <Button type="button" variant="outline" onClick={() => setEditing(null)} className="border-slate-200">
-                Cancelar
+                Cancel
               </Button>
               <Button type="submit" className="bg-slate-800 hover:bg-slate-900" disabled={saving}>
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : "Save"}

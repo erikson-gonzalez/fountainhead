@@ -50,7 +50,7 @@ export function AlbumEditDialog({
           <AlbumFormFields form={form} onChange={onChange} layout="edit" />
           <DialogFooter className="gap-2 sm:gap-0 pt-4">
             <Button type="button" onClick={onClose}>
-              Cancelar
+              Cancel
             </Button>
             <Button type="submit" disabled={saving}>
               {saving ? (

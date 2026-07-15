@@ -54,7 +54,7 @@ export function AlbumAddForm({
           <span className="ml-2">Add</span>
         </Button>
         <Button type="button" size="sm" onClick={handleCancel}>
-          Cancelar
+          Cancel
         </Button>
       </div>
     </form>

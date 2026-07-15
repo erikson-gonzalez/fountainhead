@@ -155,7 +155,7 @@ export default function AdminShop() {
   };
 
   if (loading) {
-    return <div className="text-slate-500">Cargando productos...</div>;
+    return <div className="text-slate-500">Loading products...</div>;
   }
 
   return (
@@ -201,7 +201,7 @@ export default function AdminShop() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Precio (€)</Label>
+                  <Label>Price (€)</Label>
                   <Input
                     type="number"
                     min="0"
@@ -292,7 +292,7 @@ export default function AdminShop() {
                 </Button>
                 {editingId && (
                   <Button type="button" variant="outline" onClick={handleCancel}>
-                    Cancelar
+                    Cancel
                   </Button>
                 )}
               </div>

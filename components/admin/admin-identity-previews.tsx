@@ -278,16 +278,16 @@ export function AdminTaglineSeoHelp() {
   return (
     <div className="space-y-4 mt-6 pt-6 border-t border-slate-200">
       <p className="text-sm text-slate-600">
-        <strong>Tagline</strong> se usa como meta description (SEO). No aparece visible en el sitio. La{" "}
-        <strong>Biografía</strong> se edita arriba en About y se muestra en <code className="text-xs bg-slate-100 px-1 rounded">/about</code>.
+        <strong>Tagline</strong> is used as the meta description (SEO). It isn&apos;t visible on the site. The{" "}
+        <strong>Bio</strong> is edited above in About and shown on <code className="text-xs bg-slate-100 px-1 rounded">/about</code>.
       </p>
       <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-3">
-        <h4 className="text-sm font-semibold text-slate-800">Recomendaciones SEO / Meta</h4>
+        <h4 className="text-sm font-semibold text-slate-800">SEO / Meta Recommendations</h4>
         <ul className="text-sm text-slate-600 space-y-2 list-disc list-inside">
-          <li>Mantén el tagline entre 120–160 caracteres para que Google lo muestre completo en resultados de búsqueda.</li>
-          <li>Incluye palabras clave relevantes (género, instrumento, ubicación, rol).</li>
-          <li>Usa un tono que invite al clic; evita ser genérico.</li>
-          <li>Evita repetir exactamente el título de la página.</li>
+          <li>Keep the tagline between 120–160 characters so Google shows it in full in search results.</li>
+          <li>Include relevant keywords (genre, instrument, location, role).</li>
+          <li>Use a tone that invites clicks; avoid being generic.</li>
+          <li>Avoid repeating the page title exactly.</li>
         </ul>
       </div>
     </div>
