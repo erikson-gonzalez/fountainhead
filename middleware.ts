@@ -38,12 +38,12 @@ export default auth((req) => {
     return NextResponse.next();
   }
 
-  // Portal area — role must be exactly "portal". /portal/access stays public
+  // Portal area — role must be exactly "portal". /portal-access stays public
   // (it is the request-access / sign-in entry point) and /api/portal/access too.
   if (isPortalPage || isPortalApi) {
     if (role !== "portal") {
       if (isPortalApi) return denyApi(Boolean(session));
-      return NextResponse.redirect(new URL("/portal/access", nextUrl));
+      return NextResponse.redirect(new URL("/portal-access", nextUrl));
     }
     return NextResponse.next();
   }

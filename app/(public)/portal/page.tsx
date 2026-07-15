@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export default async function PortalPage() {
   const session = await auth();
   if (!session || session.user.role !== "portal") {
-    redirect("/portal/access");
+    redirect("/portal-access");
   }
 
   const [lessons, resources] = await Promise.all([

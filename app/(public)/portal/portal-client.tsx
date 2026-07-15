@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import type { PortalLesson, PortalResource } from "@workspace/db";
-import { Play, Download, FileText, ShoppingBag, LogOut, User, BookOpen, Lock } from "lucide-react";
+import { Play, Download, FileText, ShoppingBag, LogOut, User, BookOpen, Lock, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const MOCK_ORDERS = [
@@ -16,7 +16,7 @@ const MOCK_ORDERS = [
 ];
 
 type TabId = "learning" | "history";
-type SectionId = "videos" | "tabs";
+type SectionId = "videos" | "tabs" | "courses";
 
 interface PortalUser {
   name: string;
@@ -101,6 +101,7 @@ function LearningTab({ lessons, resources }: { lessons: PortalLesson[]; resource
         {[
           { id: "videos", label: "Video Lessons" },
           { id: "tabs", label: "Tabs & PDFs" },
+          { id: "courses", label: "My Courses" },
         ].map((s: { id: SectionId; label: string }) => (
           <button
             key={s.id}
@@ -191,6 +192,16 @@ function LearningTab({ lessons, resources }: { lessons: PortalLesson[]; resource
               </Link>
             </div>
           )}
+        </div>
+      )}
+
+      {section === "courses" && (
+        <div className="text-center py-24 text-muted-foreground">
+          <GraduationCap className="w-12 h-12 mx-auto mb-4 opacity-20" />
+          <p>You don&apos;t have any courses yet.</p>
+          <Link href="/shop">
+            <Button className="mt-6">Browse Courses</Button>
+          </Link>
         </div>
       )}
     </div>

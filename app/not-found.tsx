@@ -32,7 +32,7 @@ export default function NotFound() {
         <div className="flex items-center justify-center gap-2 md:gap-4 mb-8">
           {["4", "0", "4"].map((digit, i) => (
             <motion.div
-              key={digit}
+              key={i}
               className="relative"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
