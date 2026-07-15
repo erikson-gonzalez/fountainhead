@@ -169,7 +169,7 @@ export function LiveClient({ shows }: { shows: LiveShow[] }) {
     <div className="w-full pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
         <div>
-          <h1 className="font-display text-5xl font-bold text-white uppercase tracking-wider mb-2">Live Dates</h1>
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-white uppercase tracking-wider mb-2">Live Dates</h1>
           <div className="h-1 w-24 bg-primary mb-6" />
           <p className="text-muted-foreground text-lg">Performances, masterclasses, and clinics worldwide.</p>
         </div>

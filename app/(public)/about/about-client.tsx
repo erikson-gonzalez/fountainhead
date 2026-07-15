@@ -53,7 +53,7 @@ export function AboutClient({ artistInfo }: { artistInfo: ArtistInfo | null }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="font-display text-5xl font-bold text-white mb-2">{artistInfo?.aboutHeading?.trim() || "TOM GELDSCHLÄGER"}</h1>
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-2 break-words">{artistInfo?.aboutHeading?.trim() || "TOM GELDSCHLÄGER"}</h1>
           <h2 className="text-xl text-primary uppercase tracking-[0.3em] mb-8 font-semibold">{artistInfo?.aboutSubheading?.trim() || "Fountainhead"}</h2>
 
           <div className="space-y-6 text-muted-foreground leading-relaxed text-lg font-light">

@@ -43,7 +43,7 @@ export function PortalAccessClient() {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center px-6 py-32 relative">
+    <div className="w-full min-h-screen flex items-center justify-center px-6 py-32 relative overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background" />
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/6 rounded-full blur-[120px]" />
