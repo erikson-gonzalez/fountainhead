@@ -10,5 +10,6 @@ export * from "./quotes";
 export * from "./quote-config";
 export * from "./testimonials";
 export * from "./portal";
+export * from "./portal-users";
 export * from "./services";
 export * from "./live-shows";
