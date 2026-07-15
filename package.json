@@ -11,6 +11,7 @@
     "db:seed-admin": "pnpm --filter @workspace/scripts run seed-admin",
     "db:seed-artist-info": "pnpm --filter @workspace/scripts run seed-artist-info",
     "db:seed-books": "pnpm --filter @workspace/scripts run seed-book-offerings",
+    "db:seed-portal-test-user": "pnpm --filter @workspace/scripts run seed-portal-test-user",
     "push": "pnpm --filter @workspace/db run push",
     "codegen": "pnpm --filter @workspace/api-spec run codegen",
     "build": "pnpm run typecheck && next build",

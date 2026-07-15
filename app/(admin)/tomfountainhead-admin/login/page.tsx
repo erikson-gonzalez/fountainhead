@@ -55,9 +55,8 @@ export default function AdminLogin() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="tom-admin"
                 autoComplete="username"
-                className="bg-white border-slate-200"
+                className="bg-white border-slate-200 text-slate-900"
                 required
               />
             </div>
@@ -68,9 +67,8 @@ export default function AdminLogin() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
                 autoComplete="current-password"
-                className="bg-white border-slate-200"
+                className="bg-white border-slate-200 text-slate-900"
                 required
               />
             </div>

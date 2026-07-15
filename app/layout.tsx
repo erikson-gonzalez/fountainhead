@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         {/*
           next-themes wired for the first time (§1). Single hardcoded dark theme
           today, so defaultTheme="dark" + enableSystem={false} preserves the look

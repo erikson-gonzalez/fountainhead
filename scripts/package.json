@@ -9,6 +9,7 @@
     "seed-admin": "tsx ./src/seed-admin.ts",
     "seed-artist-info": "tsx ./src/seed-artist-info.ts",
     "seed-book-offerings": "tsx ./src/seed-book-offerings.ts",
+    "seed-portal-test-user": "tsx ./src/seed-portal-test-user.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
