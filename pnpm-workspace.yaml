@@ -28,7 +28,6 @@
 minimumReleaseAge: 1440
 
 packages:
-  - apps/*
   - lib/*
   - lib/integrations/*
   - scripts
@@ -62,6 +61,7 @@ onlyBuiltDependencies:
   - esbuild
   - msw
   - unrs-resolver
+  - sharp
 
 overrides:
   # exclude non-host platforms to reduce install size
