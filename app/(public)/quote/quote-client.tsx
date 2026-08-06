@@ -10,9 +10,7 @@ import { useEstimateQuote } from "@workspace/api-client-react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowLeft, Minus, Plus } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
-
-// All service types supported by quote API — must match services page categories
-export const SERVICE_TYPES = ["mixing", "mastering", "stem-mastering", "production", "mixing-mastering", "string-arrangement", "cowriting", "guitar-solo"] as const;
+import { SERVICE_TYPES } from "./service-types";
 
 const schema = z.object({
   serviceType: z.enum(SERVICE_TYPES),

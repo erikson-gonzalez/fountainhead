@@ -1,4 +1,5 @@
-import { QuoteClient, SERVICE_TYPES } from "./quote-client";
+import { QuoteClient } from "./quote-client";
+import { SERVICE_TYPES } from "./service-types";
 
 // §1: Split. The only server work is reading the ?service= searchParam (replaces
 // the old window.location hack); the multi-step builder + estimate mutation + cart
