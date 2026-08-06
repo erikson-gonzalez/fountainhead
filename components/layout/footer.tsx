@@ -1,6 +1,19 @@
 import Link from "next/link";
+import { db, artistInfoTable } from "@workspace/db";
+import { Facebook, Instagram, Youtube, ShoppingBag } from "lucide-react";
+import { TikTokIcon, BandcampIcon } from "@/components/icons/social-icons";
 
-export function Footer() {
+export async function Footer() {
+  const [artistInfo] = await db.select().from(artistInfoTable).limit(1);
+  const socials = [
+    { key: "facebook", label: "Facebook", url: artistInfo?.facebookUrl?.trim(), Icon: Facebook },
+    { key: "instagram", label: "Instagram", url: artistInfo?.instagramUrl?.trim(), Icon: Instagram },
+    { key: "tiktok", label: "TikTok", url: artistInfo?.tiktokUrl?.trim(), Icon: TikTokIcon },
+    { key: "youtube", label: "YouTube", url: artistInfo?.youtubeUrl?.trim(), Icon: Youtube },
+    { key: "bandcamp", label: "Bandcamp", url: artistInfo?.bandcampUrl?.trim(), Icon: BandcampIcon },
+    { key: "merch", label: "Merch Store", url: artistInfo?.merchUrl?.trim(), Icon: ShoppingBag },
+  ].filter((s): s is typeof s & { url: string } => Boolean(s.url));
+
   return (
     <footer className="bg-background border-t border-secondary/10 py-16 mt-20">
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -11,14 +24,22 @@ export function Footer() {
           <p className="text-muted-foreground max-w-md leading-relaxed">
             Berlin-based guitarist, producer, and mixing engineer. Pushing the boundaries of modern metal and instrumental music with fretless guitar mastery.
           </p>
-          <div className="flex gap-4 mt-8">
-            {['Instagram', 'YouTube', 'Spotify', 'Facebook'].map(social => (
-              <a key={social} href="#" className="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors">
-                <span className="sr-only">{social}</span>
-                <div className="w-4 h-4 bg-current" style={{ maskImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Ccircle cx=\'12\' cy=\'12\' r=\'10\'/%3E%3C/svg%3E")', maskSize: 'cover' }}></div>
-              </a>
-            ))}
-          </div>
+          {socials.length > 0 && (
+            <div className="flex gap-4 mt-8">
+              {socials.map(({ key, label, url, Icon }) => (
+                <a
+                  key={key}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
+                >
+                  <span className="sr-only">{label}</span>
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
         
         <div>

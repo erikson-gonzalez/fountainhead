@@ -36,6 +36,7 @@ export function HomeClient({ artistInfo, albums, testimonials }: HomeClientProps
   // null takes the same branch the old client took while loading (undefined).
   const heroVideoUrl =
     !artistInfo ? null : (artistInfo.heroVideoUrl?.trim() || DEFAULT_HERO_VIDEO);
+  const heroVideoUrlMobile = artistInfo?.heroVideoUrlMobile?.trim() || "";
   const fallbackPoster = artistInfo?.heroPosterUrl?.trim() || "/images/hero-bg.png";
 
   useEffect(() => {
@@ -57,18 +58,20 @@ export function HomeClient({ artistInfo, albums, testimonials }: HomeClientProps
             />
           ) : heroVideoUrl && videoState !== "error" ? (
             <video
-              key={heroVideoUrl}
+              key={`${heroVideoUrl}|${heroVideoUrlMobile}`}
               autoPlay
               muted
               loop
               playsInline
               poster={fallbackPoster}
               className={`w-full h-full object-cover transition-all duration-700 ease-out ${videoState === "loading" ? "blur-2xl scale-105" : "blur-0 scale-100"}`}
-              src={heroVideoUrl}
               onLoadedData={() => setVideoState("loaded")}
               onCanPlay={() => setVideoState("loaded")}
               onError={() => setVideoState("error")}
-            />
+            >
+              {heroVideoUrlMobile && <source src={heroVideoUrlMobile} media="(max-width: 767px)" />}
+              <source src={heroVideoUrl} />
+            </video>
           ) : (
             <img
               src={fallbackPoster}
@@ -87,7 +90,7 @@ export function HomeClient({ artistInfo, albums, testimonials }: HomeClientProps
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6 uppercase tracking-[0.1em] leading-tight">
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 uppercase tracking-[0.1em] leading-tight">
               {(() => {
                 const prefix = !artistInfo ? DEFAULT_HERO.prefix : (artistInfo.heroTitlePrefix?.trim() ?? "");
                 const highlight = !artistInfo ? DEFAULT_HERO.highlight : (artistInfo.heroTitleHighlight?.trim() ?? "");

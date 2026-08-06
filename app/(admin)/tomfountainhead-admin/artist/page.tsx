@@ -30,7 +30,7 @@ import {
 } from "@/components/admin/admin-identity-previews";
 import { AdminEndorsements } from "@/components/admin/admin-endorsements";
 import { AdminLiveShows } from "@/components/admin/admin-live-shows";
-import { Loader2, User, Award, Music, Mail, Quote, ChevronDown, CalendarDays } from "lucide-react";
+import { Loader2, User, Award, Music, Mail, Quote, ChevronDown, CalendarDays, Share2 } from "lucide-react";
 
 const DEFAULT_HERO_VIDEO = "https://assets.mixkit.co/videos/3587/3587-720.mp4";
 const DEFAULT_HERO_POSTER = "";
@@ -41,6 +41,7 @@ const artistSchema = z.object({
   bio: z.string().optional(),
   heroTagline: z.string().optional(),
   heroVideoUrl: z.string().optional(),
+  heroVideoUrlMobile: z.string().optional(),
   heroPosterUrl: z.string().optional(),
   heroTitlePrefix: z.string().optional(),
   heroTitleHighlight: z.string().optional(),
@@ -53,6 +54,12 @@ const artistSchema = z.object({
   endorsements: z.string().optional(),
   endorsementsSectionTitle: z.string().optional(),
   musicLinks: z.string().optional(),
+  facebookUrl: z.string().optional(),
+  instagramUrl: z.string().optional(),
+  tiktokUrl: z.string().optional(),
+  youtubeUrl: z.string().optional(),
+  bandcampUrl: z.string().optional(),
+  merchUrl: z.string().optional(),
   contactEmail: z.string().email("Invalid email").optional().or(z.literal("")),
   contactPhone: z.string().optional(),
   contactAddress: z.string().optional(),
@@ -71,6 +78,7 @@ const DEFAULT_VALUES: ArtistFormData = {
   bio: FULL_BIO,
   heroTagline: "Berlin-based virtuoso guitarist, producer, and mixing engineer. Pushing boundaries in modern metal.",
   heroVideoUrl: DEFAULT_HERO_VIDEO,
+  heroVideoUrlMobile: "",
   heroPosterUrl: DEFAULT_HERO_POSTER,
   heroTitlePrefix: "Mastering the",
   heroTitleHighlight: "Fretless",
@@ -83,6 +91,12 @@ const DEFAULT_VALUES: ArtistFormData = {
   endorsements: "Aristides, Steinberg, Engl, Neural DSP, Bareknuckle, Elixir, MONO",
   endorsementsSectionTitle: "Official Endorsements",
   musicLinks: "",
+  facebookUrl: "",
+  instagramUrl: "",
+  tiktokUrl: "",
+  youtubeUrl: "",
+  bandcampUrl: "",
+  merchUrl: "",
   contactEmail: "thefountainhead@gmx.net",
   contactPhone: "03066300766",
   contactAddress: "Scheiblerstrasse 4, 12437 Berlin",
@@ -114,11 +128,18 @@ export default function AdminArtist() {
             aboutHeading: (data.aboutHeading || "").trim() || DEFAULT_VALUES.aboutHeading,
             aboutSubheading: (data.aboutSubheading || "").trim() || DEFAULT_VALUES.aboutSubheading,
             heroVideoUrl: (data.heroVideoUrl || "").trim() || DEFAULT_HERO_VIDEO,
+            heroVideoUrlMobile: (data.heroVideoUrlMobile || "").trim(),
             heroPosterUrl: (data.heroPosterUrl || "").trim() || "",
             aboutPortraitUrl: (data.aboutPortraitUrl || "").trim() || "",
             endorsements: (data.endorsements || "").trim() || DEFAULT_VALUES.endorsements,
             endorsementsSectionTitle: (data.endorsementsSectionTitle || "").trim() || DEFAULT_VALUES.endorsementsSectionTitle,
             musicLinks: (data.musicLinks || "").trim() || "",
+            facebookUrl: (data.facebookUrl || "").trim(),
+            instagramUrl: (data.instagramUrl || "").trim(),
+            tiktokUrl: (data.tiktokUrl || "").trim(),
+            youtubeUrl: (data.youtubeUrl || "").trim(),
+            bandcampUrl: (data.bandcampUrl || "").trim(),
+            merchUrl: (data.merchUrl || "").trim(),
             contactEmail: (data.contactEmail || "").trim() || DEFAULT_VALUES.contactEmail,
             contactPhone: (data.contactPhone || "").trim() || DEFAULT_VALUES.contactPhone,
             contactAddress: (data.contactAddress || "").trim() || DEFAULT_VALUES.contactAddress,
@@ -185,6 +206,10 @@ export default function AdminArtist() {
               <TabsTrigger value="musica" className="data-[state=active]:bg-slate-100">
                 <Music className="w-4 h-4 mr-2" />
                 Music
+              </TabsTrigger>
+              <TabsTrigger value="social" className="data-[state=active]:bg-slate-100">
+                <Share2 className="w-4 h-4 mr-2" />
+                Social
               </TabsTrigger>
               <TabsTrigger value="contacto" className="data-[state=active]:bg-slate-100">
                 <Mail className="w-4 h-4 mr-2" />
@@ -272,7 +297,7 @@ export default function AdminArtist() {
                               name="heroVideoUrl"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel className="text-slate-700">Video URL (background)</FormLabel>
+                                  <FormLabel className="text-slate-700">Video URL (desktop, horizontal)</FormLabel>
                                   <FormControl>
                                     <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://..." />
                                   </FormControl>
@@ -281,17 +306,29 @@ export default function AdminArtist() {
                             />
                             <FormField
                               control={form.control}
-                              name="heroPosterUrl"
+                              name="heroVideoUrlMobile"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel className="text-slate-700">Poster image URL (fallback)</FormLabel>
+                                  <FormLabel className="text-slate-700">Video URL (mobile, vertical)</FormLabel>
                                   <FormControl>
-                                    <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://... or leave empty" />
+                                    <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://... or leave empty to reuse desktop video" />
                                   </FormControl>
                                 </FormItem>
                               )}
                             />
                           </div>
+                          <FormField
+                            control={form.control}
+                            name="heroPosterUrl"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-slate-700">Poster image URL (fallback)</FormLabel>
+                                <FormControl>
+                                  <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://... or leave empty" />
+                                </FormControl>
+                              </FormItem>
+                            )}
+                          />
                         </div>
                         <AdminHeroPreview form={form} />
                       </div>
@@ -407,6 +444,89 @@ export default function AdminArtist() {
 
             <TabsContent value="musica" className="mt-0">
               <AdminAlbums />
+            </TabsContent>
+
+            <TabsContent value="social" className="mt-0">
+              <Card className="border-slate-200 bg-white">
+                <CardHeader>
+                  <CardTitle className="text-slate-900">Social Links</CardTitle>
+                  <CardDescription>Shown as icons in the site footer. Leave a field empty to hide that icon.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="facebookUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700">Facebook</FormLabel>
+                        <FormControl>
+                          <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://www.facebook.com/..." />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="instagramUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700">Instagram</FormLabel>
+                        <FormControl>
+                          <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://www.instagram.com/..." />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="tiktokUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700">TikTok</FormLabel>
+                        <FormControl>
+                          <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://www.tiktok.com/@..." />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="youtubeUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700">YouTube</FormLabel>
+                        <FormControl>
+                          <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://www.youtube.com/..." />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="bandcampUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700">Bandcamp</FormLabel>
+                        <FormControl>
+                          <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://....bandcamp.com/..." />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="merchUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700">Merch Store</FormLabel>
+                        <FormControl>
+                          <Input {...field} className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-400" placeholder="https://....bigcartel.com/" />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </CardContent>
+              </Card>
             </TabsContent>
 
             <TabsContent value="contacto" className="mt-0">
