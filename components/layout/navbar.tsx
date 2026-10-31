@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -65,12 +66,14 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         <Link href="/" className="group flex items-center gap-3 relative z-50">
-          <div className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 border border-primary/30 group-hover:bg-primary/20 transition-colors">
-            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-primary" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6c-2.5 0-3.5 3-3.5 3S10 9 12 9s3.5-3 3.5-3-1 3-3.5 3z" />
-            </svg>
-          </div>
+          <Image
+            src="/images/logo-heart-red.png"
+            alt="Fountainhead"
+            width={36}
+            height={36}
+            priority
+            className="w-9 h-9 object-contain transition-transform group-hover:scale-105"
+          />
           <span className="font-display font-bold text-xl tracking-[0.2em] text-foreground">
             FOUNTAINHEAD
           </span>
